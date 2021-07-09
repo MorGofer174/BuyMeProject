@@ -24,7 +24,7 @@ public class IntroScreen extends Base {
     }
 
     public void enterEmail () {
-        sendKeys(By.xpath("//input[@type='email']"),"avi@gmail.com");
+        sendKeys(By.xpath("//input[@type='email']"),"av1300865i@gmail.com");
     }
 
     public void enterPassword () {

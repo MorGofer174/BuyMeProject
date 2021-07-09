@@ -1,5 +1,6 @@
 package Main;
 
+import Pages.HomeScreen;
 import Pages.IntroScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,7 @@ public class Main {
     private static WebDriver driver;
     private static WebDriverWait wait;
     IntroScreen introScreen = new IntroScreen();
+    HomeScreen homeScreen = new HomeScreen();
 
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
@@ -59,6 +61,15 @@ public class Main {
     public void assertion(){
         introScreen.assertsTexts();
     }
+    @Test (priority = 9)
+    public void openAmount(){
+        homeScreen.amountButton();
+    }
+    @Test (priority = 10)
+    public void chooseAmount(){
+        homeScreen.chooseAmount();
+    }
+
 
 
 

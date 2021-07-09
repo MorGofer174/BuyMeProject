@@ -14,7 +14,6 @@ public  class Base {
     public void sendKeys(By locator, String text){
         driver.findElement((By)locator).sendKeys(text);
 
-       // Assert.assertEquals(driver.findElement((By)locator).getText(), text);
      }
      public void assertsText(By locator, String text){
          Assert.assertEquals(driver.findElement((By)locator).getText(), text);
