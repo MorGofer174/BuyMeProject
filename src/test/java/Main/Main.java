@@ -62,15 +62,13 @@ public class Main {
         introScreen.assertsTexts();
     }
     @Test (priority = 9)
-    public void openAmount(){
-        homeScreen.amountButton();
-    }
+    public void openAmount(){ homeScreen.openAmountList();}
     @Test (priority = 10)
     public void chooseAmount(){
         homeScreen.chooseAmount();
     }
-
-
+//    @Test (priority = 11)
+//    public void openRegion(){homeScreen.openRegionList();}
 
 
      @AfterClass // closes the browser
