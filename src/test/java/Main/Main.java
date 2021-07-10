@@ -1,6 +1,7 @@
 package Main;
 
 import Pages.HomeScreen;
+import Pages.InformationScreen;
 import Pages.IntroScreen;
 import Pages.PickBusinessScreen;
 import org.openqa.selenium.By;
@@ -21,6 +22,7 @@ public class Main {
     IntroScreen introScreen = new IntroScreen();
     HomeScreen homeScreen = new HomeScreen();
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
+    InformationScreen informationScreen = new InformationScreen();
 
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
@@ -99,6 +101,42 @@ public class Main {
     @Test (priority = 18)
     public void picksAmount(){pickBusiness.pickAmount();}
 
+    @Test (priority = 19)
+    public void sendReceiverName(){informationScreen.enterReceiverName();}
+
+    @Test (priority = 20)
+    public void openEvents(){informationScreen.openForEvent();}
+
+    @Test (priority = 21)
+    public void pickEvent(){informationScreen.pickEvent();}
+
+    @Test (priority = 22)
+    public void clearsGreetings(){informationScreen.clearBlessingText();}
+
+    @Test (priority = 23)
+    public void writGreetings(){informationScreen.sendBlessingText();}
+
+    @Test (priority = 24)
+    public void uploadsPic(){informationScreen.uploadPic();}
+
+    @Test (priority = 25)
+    public void pressContinue(){informationScreen.pressContinueButton();}
+
+    @Test (priority = 26)
+    public void choosePhone(){informationScreen.pressPhone();}
+
+    @Test (priority = 27)
+    public void writePhone (){
+        informationScreen.enterPhone();
+    }
+    @Test (priority = 28)
+    public void assertSendersName (){
+        informationScreen.assertSenderName();
+    }
+    @Test (priority = 29)
+    public void senderPhone(){
+    informationScreen.enterSenderPhone();
+    }
 
 
      @AfterClass // closes the browser

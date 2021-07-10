@@ -36,8 +36,7 @@ public class HomeScreen extends Base {
     public void chooseCategory(){
         clickElement(By.xpath("//*[@id=\"ember1003_chosen\"]/div/ul/li[10]"));
     }
-    public void pressFindGift(){
-        clickElement(By.cssSelector("a[rel=nofollow"));
+    public void pressFindGift(){clickElement(By.cssSelector("a[rel=nofollow"));
     }
 
 }
