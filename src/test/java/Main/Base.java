@@ -11,12 +11,10 @@ public  class Base {
      public void clickElement(By locator){
          driver.findElement((By)locator).click();}
 
-    public void sendKeys(By locator, String text){
+    public static void sendKeys(By locator, String text){
         driver.findElement((By)locator).sendKeys(text);
-
      }
      public void assertsText(By locator, String text){
-         Assert.assertEquals(driver.findElement((By)locator).getText(), text);
+        Assert.assertEquals(driver.findElement(locator).getText(), text);
      }
-
 }

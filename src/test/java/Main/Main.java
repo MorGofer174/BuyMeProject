@@ -35,40 +35,59 @@ public class Main {
     @Test (priority = 2)
     public void registration (){
         introScreen.clickRegister();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span")));
-    }
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span")));}
+
     @Test (priority = 3)
     public void firstName(){
-        introScreen.enterFirstName();
+        introScreen.assertTexts();
     }
+
     @Test (priority = 4)
     public void email(){
         introScreen.enterEmail();
     }
+
     @Test (priority = 5)
     public void password(){
         introScreen.enterPassword();
     }
+
     @Test (priority = 6)
     public void passwordAgain(){
         introScreen.re_enterPassword();
     }
+
     @Test (priority = 7)
     public void register(){
         introScreen.confirmRegistration();
     }
-    @Test (priority = 8)
-    public void assertion(){
-        introScreen.assertsTexts();
-    }
+
+//    @Test (priority = 8)
+//    public void assertion(){
+//        introScreen.assertTexts();
+//    }
+
     @Test (priority = 9)
     public void openAmount(){ homeScreen.openAmountList();}
+
     @Test (priority = 10)
-    public void chooseAmount(){
-        homeScreen.chooseAmount();
-    }
-//    @Test (priority = 11)
-//    public void openRegion(){homeScreen.openRegionList();}
+    public void chooseAmount(){ homeScreen.chooseAmount();}
+
+    @Test (priority = 11)
+    public void openRegion(){homeScreen.openRegionList();}
+
+    @Test (priority = 12)
+    public void chooseRegion(){ homeScreen.chooseRegion();}
+
+    @Test (priority = 13)
+    public void openCategory(){homeScreen.openCategoryList();}
+
+    @Test (priority = 14)
+    public void chooseCategory(){ homeScreen.chooseCategory();}
+
+    @Test (priority = 15)
+    public void findGift(){ homeScreen.pressFindGift();}
+
 
 
      @AfterClass // closes the browser
