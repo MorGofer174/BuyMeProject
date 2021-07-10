@@ -56,12 +56,15 @@ public class InformationScreen<wait> extends Base {
         sendKeys(By.cssSelector("input[type='tel']"),"0543114709");
     }
     public void assertSenderName(){
-        WebElement scrollElement = driver.findElement(By.id("ember2170"));
+        By senderNameLocator = By.xpath("//input[@id='ember2170' and @maxlength='25']");
+        WebElement scrollElement = driver.findElement(senderNameLocator);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",scrollElement);
-        String senderName = driver.findElement(By.id("ember2170")).getText();
-        Assert.assertEquals(senderName, "AVI");
+        clickElement(senderNameLocator);
+        WebElement senderNameElement = driver.findElement(senderNameLocator);
+        String senderName = "AVI";
+        Assert.assertEquals(senderName, senderNameElement.getText());
     }
     public void enterSenderPhone(){
-        sendKeys(By.cssSelector("input[data-parsley-mobile=\"mobile\"]"), "0543223465");
+        sendKeys(By.id("ember2179"), "0543223465");
     }
 }
