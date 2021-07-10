@@ -66,10 +66,10 @@ public class Main {
         introScreen.confirmRegistration();
     }
 
-//    @Test (priority = 8)
-//    public void assertion(){
-//        introScreen.assertTexts();
-//    }
+    @Test (priority = 8)
+    public void assertion(){
+        introScreen.assertTexts();
+    }
 
     @Test (priority = 9)
     public void openAmount(){ homeScreen.openAmountList();}

@@ -56,9 +56,9 @@ public class InformationScreen<wait> extends Base {
         sendKeys(By.cssSelector("input[type='tel']"),"0543114709");
     }
     public void assertSenderName(){
-        By senderNameLocator = By.xpath("//input[@id='ember2170' and @maxlength='25']");
-        WebElement scrollElement = driver.findElement(senderNameLocator);
+        WebElement scrollElement = driver.findElement(By.xpath("//input[@id='ember2170' and @maxlength='25']"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",scrollElement);
+        By senderNameLocator = By.xpath("//input[@id='ember2170' and @maxlength='25']");
         clickElement(senderNameLocator);
         WebElement senderNameElement = driver.findElement(senderNameLocator);
         String senderName = "AVI";

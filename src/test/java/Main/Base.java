@@ -2,6 +2,8 @@ package Main;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 
 public  class Base {
@@ -13,7 +15,7 @@ public  class Base {
     public static void sendKeys(By locator, String text){
         driver.findElement((By)locator).sendKeys(text);
      }
-//     public void assertsText(By locator, String text){
-//        Assert.assertEquals(driver.findElement(locator).getText(), text);
-//     }
+     public void assertsText(WebElement element, String text){
+        Assert.assertEquals(element.getText(), text);
+     }
 }
