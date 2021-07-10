@@ -2,6 +2,7 @@ package Main;
 
 import Pages.HomeScreen;
 import Pages.IntroScreen;
+import Pages.PickBusinessScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +20,7 @@ public class Main {
     private static WebDriverWait wait;
     IntroScreen introScreen = new IntroScreen();
     HomeScreen homeScreen = new HomeScreen();
+    PickBusinessScreen pickBusiness = new PickBusinessScreen();
 
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
@@ -39,7 +41,7 @@ public class Main {
 
     @Test (priority = 3)
     public void firstName(){
-        introScreen.assertTexts();
+        introScreen.enterFirstName();
     }
 
     @Test (priority = 4)
@@ -87,6 +89,15 @@ public class Main {
 
     @Test (priority = 15)
     public void findGift(){ homeScreen.pressFindGift();}
+
+    @Test (priority = 16)
+    public void assertsPickBusinessURL(){ pickBusiness.assertURL();}
+
+    @Test (priority = 17)
+    public void picksBusiness(){ pickBusiness.pickABusiness();}
+
+    @Test (priority = 18)
+    public void picksAmount(){pickBusiness.pickAmount();}
 
 
 
