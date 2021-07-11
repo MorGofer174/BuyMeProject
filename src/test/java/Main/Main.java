@@ -4,6 +4,10 @@ import Pages.HomeScreen;
 import Pages.InformationScreen;
 import Pages.IntroScreen;
 import Pages.PickBusinessScreen;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,6 +27,8 @@ public class Main {
     HomeScreen homeScreen = new HomeScreen();
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
     InformationScreen informationScreen = new InformationScreen();
+    private static ExtentReports extent= new ExtentReports();
+    private static ExtentTest test = extent.createTest("MyFirstTest", "Sample description");
 
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
@@ -30,6 +36,9 @@ public class Main {
         driver.get("https://buyme.co.il/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        ExtentSparkReporter htmlReporter = new ExtentSparkReporter("C://Users//extent.html"); //todo
+        extent.attachReporter(htmlReporter);
+        test.log(Status.INFO, "before test method");
     }
     @Test (priority = 1)
     public void enter (){
@@ -141,6 +150,7 @@ public class Main {
 
      @AfterClass // closes the browser
       public void close() {
+         extent.flush();
       //  driver.quit();
     }
 }
