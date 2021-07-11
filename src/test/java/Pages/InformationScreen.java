@@ -16,6 +16,7 @@ public class InformationScreen<wait> extends Base {
 
     private static WebDriver driver = Singleton.getDriverInstance();
     private WebDriverWait wait;
+    IntroScreen introScreen = new IntroScreen();
 
 
     public void enterReceiverName(){
@@ -61,8 +62,8 @@ public class InformationScreen<wait> extends Base {
         By senderNameLocator = By.xpath("//input[@id='ember2170' and @maxlength='25']");
         clickElement(senderNameLocator);
         WebElement senderNameElement = driver.findElement(senderNameLocator);
-        String senderName = "AVI";
-        Assert.assertEquals(senderName, senderNameElement.getText());
+        String senderName = "Avi";
+        Assert.assertEquals(senderNameElement.getText(), senderName);
     }
     public void enterSenderPhone(){
         sendKeys(By.id("ember2179"), "0543223465");

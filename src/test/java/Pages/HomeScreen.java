@@ -3,6 +3,7 @@ package Pages;
 import Main.Base;
 import Main.Singleton;
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -13,17 +14,32 @@ public class HomeScreen extends Base {
     private static WebDriver driver = Singleton.getDriverInstance();
 
     public void openAmountList(){
-       List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
-       for (WebElement element : list);
-        list.get(0).click();
+        try {
+            List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
+            for (WebElement element : list);
+            list.get(0).click();
+        }catch (InvalidElementStateException e){
+            e.printStackTrace();
+            takeElementScreenShot((WebElement) By.className("seperator-link"));
+        }
     }
     public void chooseAmount(){
-        clickElement(By.xpath("//*[@id=\"ember978_chosen\"]/div/ul/li[3]"));
+        try {
+            clickElement(By.xpath("//*[@id=\"ember978_chosen\"]/div/ul/li[3]"));
+        }catch (InvalidElementStateException e){
+            e.printStackTrace();
+            takeElementScreenShot((WebElement) By.className("seperator-link"));
+        }
     }
     public void openRegionList (){
-        List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
-        for (WebElement element : list);
-         list.get(1).click();
+        try {
+            List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
+            for (WebElement element : list);
+            list.get(1).click();
+        }catch (InvalidElementStateException e){
+            e.printStackTrace();
+            takeElementScreenShot((WebElement) By.className("seperator-link"));
+        }
     }
     public void chooseRegion(){
         clickElement(By.xpath("//*[@id=\"ember993_chosen\"]/div/ul/li[4]"));

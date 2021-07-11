@@ -68,7 +68,7 @@ public class Main {
 
     @Test (priority = 8)
     public void assertion(){
-        introScreen.assertTexts();
+       // introScreen.assertTexts();
     }
 
     @Test (priority = 9)
