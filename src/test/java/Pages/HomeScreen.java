@@ -2,6 +2,8 @@ package Pages;
 
 import Main.Base;
 import Main.Singleton;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,60 +16,54 @@ public class HomeScreen extends Base {
     private static WebDriver driver = Singleton.getDriverInstance();
     String timeNow = String.valueOf(System.currentTimeMillis());
 
-    public void openAmountList(){
+    public void openAmountList(){      // clicks on the first combo box choose amount
         try {
             List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
             for (WebElement element : list);
             list.get(0).click();
+            test.log(Status.PASS,"executed successfully");
         }catch (NoSuchElementException e){
             e.printStackTrace();
+            test.log(Status.FAIL,"execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());        }
         }
-    }
-    public void chooseAmount(){
-        try {
+
+    public void chooseAmount(){    // chooses one of the options
             clickElement(By.xpath("//*[@id=\"ember978_chosen\"]/div/ul/li[3]"));
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void openRegionList (){
+
+    public void openRegionList (){    // clicks on the second combo box choose region
         try {
             List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
             for (WebElement element : list);
             list.get(1).click();
+            test.log(Status.PASS,"executed successfully");
         }catch (NoSuchElementException e){
             e.printStackTrace();
+            test.log(Status.FAIL,"execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());
         }
     }
-    public void chooseRegion(){
-        try {
+    public void chooseRegion(){         // chooses one of the options
             clickElement(By.xpath("//*[@id=\"ember993_chosen\"]/div/ul/li[4]"));
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void openCategoryList (){
+
+    public void openCategoryList () {     // clicks on the third combo box choose category
         try {
             List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
-            for (WebElement element : list);
+            for (WebElement element : list) ;
             list.get(2).click();
-        }catch (NoSuchElementException e){
+            test.log(Status.PASS, "executed successfully");
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
+            test.log(Status.FAIL, "execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());
         }
     }
-    public void chooseCategory(){
-        try {
+
+    public void chooseCategory(){      // chooses one of the options
             clickElement(By.xpath("//*[@id=\"ember1003_chosen\"]/div/ul/li[10]"));
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void pressFindGift(){
-        try {
+
+    public void pressFindGift(){       //clicks on find gift
             clickElement(By.cssSelector("a[rel=nofollow"));
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
 
 }

@@ -28,7 +28,7 @@ public class Main {
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
     InformationScreen informationScreen = new InformationScreen();
     private static ExtentReports extent= new ExtentReports();
-    private static ExtentTest test = extent.createTest("MyFirstTest", "Sample description");
+    private static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
 
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
@@ -36,7 +36,8 @@ public class Main {
         driver.get("https://buyme.co.il/");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        ExtentSparkReporter htmlReporter = new ExtentSparkReporter("C://Users//extent.html"); //todo
+        String cwd = System.getProperty("user.dir");
+        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extent.html");
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO, "before test method");
     }
@@ -46,14 +47,12 @@ public class Main {
     }
 
     @Test (priority = 2)
-    public void registration (){
+    public void registration () {
         introScreen.clickRegister();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span")));}
 
     @Test (priority = 3)
-    public void firstName(){
-        introScreen.enterFirstName();
-    }
+    public void firstName(){introScreen.enterFirstName();}
 
     @Test (priority = 4)
     public void email(){
@@ -76,81 +75,72 @@ public class Main {
     }
 
     @Test (priority = 8)
-    public void assertion(){
-       // introScreen.assertTexts();
-    }
-
-    @Test (priority = 9)
     public void openAmount(){ homeScreen.openAmountList();}
 
-    @Test (priority = 10)
+    @Test (priority = 9)
     public void chooseAmount(){ homeScreen.chooseAmount();}
 
-    @Test (priority = 11)
+    @Test (priority = 10)
     public void openRegion(){homeScreen.openRegionList();}
 
-    @Test (priority = 12)
+    @Test (priority = 11)
     public void chooseRegion(){ homeScreen.chooseRegion();}
 
-    @Test (priority = 13)
+    @Test (priority = 12)
     public void openCategory(){homeScreen.openCategoryList();}
 
-    @Test (priority = 14)
+    @Test (priority = 13)
     public void chooseCategory(){ homeScreen.chooseCategory();}
 
-    @Test (priority = 15)
+    @Test (priority = 14)
     public void findGift(){ homeScreen.pressFindGift();}
 
-    @Test (priority = 16)
+    @Test (priority = 15)
     public void assertsPickBusinessURL(){ pickBusiness.assertURL();}
 
-    @Test (priority = 17)
+    @Test (priority = 16)
     public void picksBusiness(){ pickBusiness.pickABusiness();}
 
-    @Test (priority = 18)
+    @Test (priority = 17)
     public void picksAmount(){pickBusiness.pickAmount();}
 
-    @Test (priority = 19)
+    @Test (priority = 18)
     public void sendReceiverName(){informationScreen.enterReceiverName();}
 
-    @Test (priority = 20)
-    public void openEvents(){informationScreen.openForEvent();}
+    @Test (priority = 19)
+    public void openEvents(){informationScreen.openForWhatEvent();}
 
-    @Test (priority = 21)
+    @Test (priority = 20)
     public void pickEvent(){informationScreen.pickEvent();}
 
-    @Test (priority = 22)
+    @Test (priority = 21)
     public void clearsGreetings(){informationScreen.clearBlessingText();}
 
-    @Test (priority = 23)
+    @Test (priority = 22)
     public void writGreetings(){informationScreen.sendBlessingText();}
 
-    @Test (priority = 24)
+    @Test (priority = 23)
     public void uploadsPic(){informationScreen.uploadPic();}
 
-    @Test (priority = 25)
+    @Test (priority = 24)
     public void pressContinue(){informationScreen.pressContinueButton();}
 
-    @Test (priority = 26)
+    @Test (priority = 25)
     public void choosePhone(){informationScreen.pressPhone();}
 
+    @Test (priority = 26)
+    public void writePhone (){informationScreen.enterPhone();}
+
     @Test (priority = 27)
-    public void writePhone (){
-        informationScreen.enterPhone();
-    }
+    public void assertSendersName (){informationScreen.assertSenderName();}
+
     @Test (priority = 28)
-    public void assertSendersName (){
-        informationScreen.assertSenderName();
-    }
-    @Test (priority = 29)
-    public void senderPhone(){
-    informationScreen.enterSenderPhone();
-    }
+    public void senderPhone(){informationScreen.enterSenderPhone();}
 
 
-     @AfterClass // closes the browser
-      public void close() {
-         extent.flush();
-      //  driver.quit();
+     @AfterClass //  flushes the report and closes the browser
+     public void close() {
+        extent.flush();
+        driver.quit();
     }
 }

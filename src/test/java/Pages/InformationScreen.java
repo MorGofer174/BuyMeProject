@@ -2,10 +2,14 @@ package Pages;
 
 import Main.Base;
 import Main.Singleton;
-import org.openqa.selenium.*;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.NoSuchElementException;
@@ -14,50 +18,31 @@ public class InformationScreen<wait> extends Base {
 
     private static WebDriver driver = Singleton.getDriverInstance();
     private WebDriverWait wait;
-    IntroScreen introScreen = new IntroScreen();
     String timeNow = String.valueOf(System.currentTimeMillis());
 
 
-    public void enterReceiverName(){
-        try {
+    public void enterReceiverName(){      // sends receiver name
             clickElement(By.xpath("//input[@id='ember1994' and @type='text']"));
             sendKeys(By.xpath("//input[@id='ember1994' and @type='text']"),"מור");
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void openForEvent(){
-        try {
+
+    public void openForWhatEvent(){      //opens the events combo box
             clickElement(By.className("selected-text"));
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void pickEvent(){
-        try {
+
+    public void pickEvent(){          //chooses a specific event
             clickElement(By.xpath("//*[@id=\"ember2102\"]"));
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void clearBlessingText(){
-        try {
+    public void clearBlessingText(){    // clears the test in the blessing block
             By blessingTextLocator = By.cssSelector("textarea[data-parsley-group=voucher-greeting");
             clickElement(blessingTextLocator);
             driver.findElement((By)blessingTextLocator).clear();
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void sendBlessingText(){
-        try {
+    public void sendBlessingText(){      // writes a new blessing
             By blessingTextLocator = By.cssSelector("textarea[data-parsley-group=voucher-greeting");
             sendKeys(blessingTextLocator, "happy birthday!! much love!!");
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void uploadPic(){
+    public void uploadPic(){       // uploads a pic
         try {
             By picLocator = By.xpath("//input[@name='logo' and @type='file']");
             WebElement scrollElement = driver.findElement(picLocator);
@@ -65,51 +50,39 @@ public class InformationScreen<wait> extends Base {
             wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(picLocator));
             driver.findElement(picLocator).sendKeys("C:\\Users\\morg\\Desktop\\cutePuppy.jpg");
+            test.log(Status.PASS, "executed successfully");
         }catch (NoSuchElementException e){
             e.printStackTrace();
+            test.log(Status.FAIL, "execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());
         }
     }
-    public void pressContinueButton(){
-        try {
-            clickElement(By.id("ember2011"));
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
 
+    public void pressContinueButton(){    // presses the continue button
+            clickElement(By.id("ember2011"));
     }
-    public void pressPhone(){
-        try {
+
+    public void pressPhone(){     // chooses the SMS option
             clickElement(By.cssSelector("path[class='circle']"));
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
-    public void enterPhone(){
-        try {
+    public void enterPhone(){     // sends the phone number
             clickElement(By.cssSelector("input[type='tel']"));
             sendKeys(By.cssSelector("input[type='tel']"),"0543114709");
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
+
     public void assertSenderName(){
         try {
             WebElement scrollElement = driver.findElement(By.xpath("//input[@id='ember2170' and @maxlength='25']"));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",scrollElement);
             By senderNameLocator = By.xpath("//input[@id='ember2170' and @maxlength='25']");
-            clickElement(senderNameLocator);
             WebElement senderNameElement = driver.findElement(senderNameLocator);
             String senderName = "Avi";
-            Assert.assertEquals(senderNameElement.getText(), senderName);
+            assertsText(senderNameElement,senderName);
         }catch (NoSuchElementException e){
             e.printStackTrace();
         }
     }
-    public void enterSenderPhone(){
-        try {
+
+    public void enterSenderPhone(){    // sends the sender's phone number
             sendKeys(By.id("ember2179"), "0543223465");
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
 }

@@ -2,6 +2,7 @@ package Main;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.apache.commons.io.FileUtils;
@@ -17,30 +18,31 @@ public  class Base {
      private static WebDriver driver = Singleton.getDriverInstance();
     ExtentSparkReporter htmlReporter = new ExtentSparkReporter("C://Users//extent.html"); //todo
     private static ExtentReports extent= new ExtentReports();
-    private static ExtentTest test = extent.createTest("MyFirstTest", "Sample description");
-
+    public static ExtentTest test = extent.createTest("MyFirstTest", "Sample description");
+    static String timeNow = String.valueOf(System.currentTimeMillis());
 
 
     public void clickElement(By locator) {
         try {
             driver.findElement((By) locator).click();
+            test.log(Status.PASS,"executed successfully");
         } catch (NoSuchElementException e){
-            test.info("details".MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot("pic")).build());
-        }
+            test.log(Status.FAIL,"execution failed",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());        }
     }
 
     public static void sendKeys(By locator, String text){
         try {
             driver.findElement((By)locator).sendKeys(text);
+            test.log(Status.PASS,"executed successfully");
         } catch (NoSuchElementException e){
-            test.info("details".MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot("pic")).build());
+            test.log(Status.FAIL,"execution failed",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());        }
         }
-     }
 
     public void assertsText(WebElement element, String text){
-         element.click();
-        Assert.assertEquals(element.getText(), text);
+        String value = element.getAttribute("value");
+        Assert.assertEquals(value,text);
      }
+
 
     public static String takeScreenShot(String ImagesPath) {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
