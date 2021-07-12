@@ -3,7 +3,6 @@ package Pages;
 import Main.Base;
 import Main.Singleton;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -51,10 +50,9 @@ public class InformationScreen<wait> extends Base {
             wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(picLocator));
             driver.findElement(picLocator).sendKeys("C:\\Users\\morg\\Desktop\\cutePuppy.jpg");
-            test.log(Status.PASS, "executed successfully");
         }catch (NoSuchElementException e){
             e.printStackTrace();
-            test.log(Status.FAIL, "execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());
+            MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
         }
     }
 
@@ -66,7 +64,7 @@ public class InformationScreen<wait> extends Base {
             clickElement(By.cssSelector("path[class='circle']"));
     }
     public void enterPhone(){     // sends the phone number
-            clickElement(By.cssSelector("input[type='tel']"));
+            clickElement(By.cssSelector("inp9ut[type='tel']"));
             sendKeys(By.cssSelector("input[type='tel']"),"0543114709");
     }
 

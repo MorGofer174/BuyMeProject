@@ -3,7 +3,6 @@ package Pages;
 import Main.Base;
 import Main.Singleton;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,10 +20,9 @@ public class HomeScreen extends Base {
             List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
             for (WebElement element : list);
             list.get(0).click();
-            test.log(Status.PASS,"executed successfully");
         }catch (NoSuchElementException e){
             e.printStackTrace();
-            test.log(Status.FAIL,"execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());        }
+            MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();        }
         }
 
     public void chooseAmount(){    // chooses one of the options
@@ -36,10 +34,9 @@ public class HomeScreen extends Base {
             List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
             for (WebElement element : list);
             list.get(1).click();
-            test.log(Status.PASS,"executed successfully");
         }catch (NoSuchElementException e){
             e.printStackTrace();
-            test.log(Status.FAIL,"execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());
+            MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
         }
     }
     public void chooseRegion(){         // chooses one of the options
@@ -51,10 +48,9 @@ public class HomeScreen extends Base {
             List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
             for (WebElement element : list) ;
             list.get(2).click();
-            test.log(Status.PASS, "executed successfully");
         } catch (NoSuchElementException e) {
             e.printStackTrace();
-            test.log(Status.FAIL, "execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());
+            MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
         }
     }
 

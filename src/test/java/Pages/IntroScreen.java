@@ -2,10 +2,7 @@ package Pages;
 
 import Main.Base;
 import Main.Singleton;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,11 +15,7 @@ import static org.openqa.selenium.support.locators.RelativeLocator.withTagName;
 public class IntroScreen extends Base {
 
     private static final WebDriver driver = Singleton.getDriverInstance();
-    private static final ExtentReports extent = Base.getReportInstance();
-    public static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
     String timeNow = String.valueOf(System.currentTimeMillis());
-//    static ExtentReports thisExtent = Main.extent;
-//    private static ExtentTest test = thisExtent.createTest("BuyMeSanity", "MyFirstLog");
     public static String name = "Avi";
 
 
@@ -40,17 +33,16 @@ public class IntroScreen extends Base {
             WebElement nameWebElement = driver.findElement(nameLocator);
             nameWebElement.sendKeys(name);
             assertsText(nameWebElement, name);
-            test.log(Status.PASS, "executed successfully");
         } catch (NoSuchElementException e) {
-            test.log(Status.FAIL, "execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());
+            MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
         }
     }
 
     public void enterEmail() {        // sends email and asserts
         By emailLocator = By.xpath("//input[@type='email']");
-        sendKeys(emailLocator, "afh4444j8j3njgcyy@gmail.com");
+        sendKeys(emailLocator, "afbbb8j3njgcy88@gmail.com");
         WebElement emailWebElement = driver.findElement(emailLocator);
-        assertsText(emailWebElement, "afh4444j8j3njgcyy@gmail.com");
+        assertsText(emailWebElement, "afbbb8j3njgcy88@gmail.com");
     }
 
     public void enterPassword() {     // sends password and asserts

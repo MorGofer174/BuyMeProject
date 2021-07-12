@@ -28,6 +28,7 @@ public class Main {
     HomeScreen homeScreen = new HomeScreen();
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
     Extra extra = new Extra();
+    Singleton singleton = new Singleton();
     InformationScreen informationScreen = new InformationScreen();
     public static ExtentReports extent= new ExtentReports();
     public static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
@@ -35,7 +36,8 @@ public class Main {
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
         driver = Singleton.getDriverInstance();
-        driver.get("https://buyme.co.il/");
+        String URL = singleton.getURL();
+        driver.get(URL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String cwd = System.getProperty("user.dir");
@@ -91,86 +93,229 @@ public class Main {
 
     @Test (priority = 6)
     public void email(){
-        introScreen.enterEmail();
+        try {
+            introScreen.enterEmail();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
     }
 
     @Test (priority = 7)
     public void password(){
-        introScreen.enterPassword();
+        try {
+            introScreen.enterPassword();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
     }
 
     @Test (priority = 8)
     public void passwordAgain(){
-        introScreen.re_enterPassword();
+        try {
+            introScreen.re_enterPassword();
+        test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+        test.log(Status.FAIL,"execution failed");}
     }
 
     @Test (priority = 9)
     public void register(){
-        introScreen.confirmRegistration();
+        try {
+            introScreen.confirmRegistration();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
     }
 
     @Test (priority = 10)
-    public void openAmount(){ homeScreen.openAmountList();}
+    public void openAmount(){
+        try {
+            homeScreen.openAmountList();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 11)
-    public void chooseAmount(){ homeScreen.chooseAmount();}
+    public void chooseAmount(){
+        try {
+            homeScreen.chooseAmount();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 12)
-    public void openRegion(){homeScreen.openRegionList();}
+    public void openRegion(){
+        try {
+            homeScreen.openRegionList();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 13)
-    public void chooseRegion(){ homeScreen.chooseRegion();}
+    public void chooseRegion(){
+        try {
+            homeScreen.chooseRegion();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 14)
-    public void openCategory(){homeScreen.openCategoryList();}
+    public void openCategory(){
+        try {
+            homeScreen.openCategoryList();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+
+    }
 
     @Test (priority = 15)
-    public void chooseCategory(){ homeScreen.chooseCategory();}
+    public void chooseCategory(){
+        try {
+            homeScreen.chooseCategory();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 16)
-    public void findGift(){ homeScreen.pressFindGift();}
+    public void findGift(){
+        try {
+            homeScreen.pressFindGift();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 17)
-    public void assertsPickBusinessURL(){ pickBusiness.assertURL();}
+    public void assertsPickBusinessURL(){
+        try {
+            pickBusiness.assertURL();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 18)
-    public void picksBusiness(){ pickBusiness.pickABusiness();}
+    public void picksBusiness(){
+        try {
+            pickBusiness.pickABusiness();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 19)
-    public void picksAmount(){pickBusiness.pickAmount();}
+    public void picksAmount(){
+        try {
+            pickBusiness.pickAmount();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 20)
-    public void sendReceiverName(){informationScreen.enterReceiverName();}
+    public void sendReceiverName(){
+        try {
+            informationScreen.enterReceiverName();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 21)
-    public void openEvents(){informationScreen.openForWhatEvent();}
+    public void openEvents(){
+        try {
+            informationScreen.openForWhatEvent();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 22)
-    public void pickEvent(){informationScreen.pickEvent();}
+    public void pickEvent(){
+        try {
+            informationScreen.pickEvent();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 23)
-    public void clearsGreetings(){informationScreen.clearBlessingText();}
+    public void clearsGreetings(){
+        try {
+            informationScreen.clearBlessingText();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 24)
-    public void writGreetings(){informationScreen.sendBlessingText();}
+    public void writGreetings(){
+        try {
+            informationScreen.sendBlessingText();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 25)
-    public void uploadsPic(){informationScreen.uploadPic();}
+    public void uploadsPic(){
+        try {
+            informationScreen.uploadPic();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 26)
-    public void pressContinue(){informationScreen.pressContinueButton();}
+    public void pressContinue(){
+        try {
+            informationScreen.pressContinueButton();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 27)
-    public void choosePhone(){informationScreen.pressPhone();}
+    public void choosePhone(){
+        try {
+            informationScreen.pressPhone();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 28)
-    public void writePhone (){informationScreen.enterPhone();}
+    public void writePhone (){
+        try {
+            informationScreen.enterPhone();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 29)
-    public void assertSendersName (){informationScreen.assertSenderName();}
+    public void assertSendersName (){
+        try {
+            informationScreen.assertSenderName();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
     @Test (priority = 30)
-    public void senderPhone(){informationScreen.enterSenderPhone();}
+    public void senderPhone(){
+        try {
+            informationScreen.enterSenderPhone();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
+    }
 
 
      @AfterClass //  flushes the report and closes the browser
