@@ -11,13 +11,13 @@ import java.util.NoSuchElementException;
 
 
 public  class Base {
-    private static WebDriver driver = Singleton.getDriverInstance();
+    private static final WebDriver driver = Singleton.getDriverInstance();
     static String timeNow = String.valueOf(System.currentTimeMillis());
 
 
     public void clickElement(By locator) {
         try {
-            driver.findElement((By) locator).click();
+            driver.findElement(locator).click();
         } catch (NoSuchElementException e) {
             MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
         }
@@ -25,7 +25,7 @@ public  class Base {
 
     public static void sendKeys(By locator, String text) {
         try {
-            driver.findElement((By) locator).sendKeys(text);
+            driver.findElement(locator).sendKeys(text);
         } catch (NoSuchElementException e) {
             MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
         }

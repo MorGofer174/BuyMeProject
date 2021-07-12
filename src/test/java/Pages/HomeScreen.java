@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 public class HomeScreen extends Base {
 
-    private static WebDriver driver = Singleton.getDriverInstance();
+    private static final WebDriver driver = Singleton.getDriverInstance();
     String timeNow = String.valueOf(System.currentTimeMillis());
 
     public void openAmountList(){      // clicks on the first combo box choose amount

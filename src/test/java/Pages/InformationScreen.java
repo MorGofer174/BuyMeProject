@@ -13,12 +13,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 
-public class InformationScreen<wait> extends Base {
+public class InformationScreen extends Base {
 
-    private static WebDriver driver = Singleton.getDriverInstance();
-    private WebDriverWait wait;
+    private static final WebDriver driver = Singleton.getDriverInstance();
     String timeNow = String.valueOf(System.currentTimeMillis());
-    IntroScreen introScreen = new IntroScreen();
 
 
     public void enterReceiverName(){      // sends receiver name
@@ -36,7 +34,7 @@ public class InformationScreen<wait> extends Base {
     public void clearBlessingText(){    // clears the test in the blessing block
             By blessingTextLocator = By.cssSelector("textarea[data-parsley-group=voucher-greeting");
             clickElement(blessingTextLocator);
-            driver.findElement((By)blessingTextLocator).clear();
+            driver.findElement(blessingTextLocator).clear();
     }
     public void sendBlessingText(){      // writes a new blessing
             By blessingTextLocator = By.cssSelector("textarea[data-parsley-group=voucher-greeting");
@@ -47,7 +45,7 @@ public class InformationScreen<wait> extends Base {
             By picLocator = By.xpath("//input[@name='logo' and @type='file']");
             WebElement scrollElement = driver.findElement(picLocator);
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",scrollElement);
-            wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(picLocator));
             driver.findElement(picLocator).sendKeys("C:\\Users\\morg\\Desktop\\cutePuppy.jpg");
         }catch (NoSuchElementException e){
