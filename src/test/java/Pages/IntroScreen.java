@@ -2,6 +2,8 @@ package Pages;
 
 import Main.Base;
 import Main.Singleton;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
@@ -15,9 +17,13 @@ import static org.openqa.selenium.support.locators.RelativeLocator.withTagName;
 
 public class IntroScreen extends Base {
 
-    private static WebDriver driver = Singleton.getDriverInstance();
-    public static WebElement element;
+    private static final WebDriver driver = Singleton.getDriverInstance();
+    private static final ExtentReports extent = Base.getReportInstance();
+    public static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
     String timeNow = String.valueOf(System.currentTimeMillis());
+//    static ExtentReports thisExtent = Main.extent;
+//    private static ExtentTest test = thisExtent.createTest("BuyMeSanity", "MyFirstLog");
+    public static String name = "Avi";
 
 
     public void clickEnter() {            // clicks on user enter
@@ -32,7 +38,6 @@ public class IntroScreen extends Base {
         try {
             By nameLocator = By.xpath("//input[@type='text']");
             WebElement nameWebElement = driver.findElement(nameLocator);
-            String name = "Avi";
             nameWebElement.sendKeys(name);
             assertsText(nameWebElement, name);
             test.log(Status.PASS, "executed successfully");
@@ -43,9 +48,9 @@ public class IntroScreen extends Base {
 
     public void enterEmail() {        // sends email and asserts
         By emailLocator = By.xpath("//input[@type='email']");
-        sendKeys(emailLocator, "afhl77dyjyy8jnnu8j3njgcyy@gmail.com");
+        sendKeys(emailLocator, "afh6l77dhjnyttjj5jjhkkjj5jkkj8j3njgcyy@gmail.com");
         WebElement emailWebElement = driver.findElement(emailLocator);
-        assertsText(emailWebElement, "afhl77dyjyy8jnnu8j3njgcyy@gmail.com");
+        assertsText(emailWebElement, "afh6l77dhjnyttjj5jjhkkjj5jkkj8j3njgcyy@gmail.com");
     }
 
     public void enterPassword() {     // sends password and asserts

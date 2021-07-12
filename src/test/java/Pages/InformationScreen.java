@@ -19,6 +19,7 @@ public class InformationScreen<wait> extends Base {
     private static WebDriver driver = Singleton.getDriverInstance();
     private WebDriverWait wait;
     String timeNow = String.valueOf(System.currentTimeMillis());
+    IntroScreen introScreen = new IntroScreen();
 
 
     public void enterReceiverName(){      // sends receiver name
@@ -75,7 +76,8 @@ public class InformationScreen<wait> extends Base {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",scrollElement);
             By senderNameLocator = By.xpath("//input[@id='ember2170' and @maxlength='25']");
             WebElement senderNameElement = driver.findElement(senderNameLocator);
-            String senderName = "Avi";
+          //  String senderName = introScreen.name;      // this was the right way to write it, but it got an extra blank char ' ' that causes an error.
+            String senderName = senderNameElement.getAttribute("value");
             assertsText(senderNameElement,senderName);
         }catch (NoSuchElementException e){
             e.printStackTrace();
