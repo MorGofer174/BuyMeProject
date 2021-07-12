@@ -45,27 +45,49 @@ public class Main {
     }
     @Test (priority = 1)
     public void enter (){
-        introScreen.clickEnter();
-      //  test.log(Status.FAIL,"ljf");
+        try {
+            introScreen.clickEnter();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+        test.log(Status.FAIL,"execution failed");}
     }
 
     @Test (priority = 2)
     public void enterNoCredentials(){
-        extra.pressEnterNoCredentials();
+        try {
+            extra.pressEnterNoCredentials();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
     }
 
     @Test(priority = 3)
     public void assertErrors(){
-        extra.assertsErrors();
-
+        try {
+            extra.assertsErrors();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+            test.log(Status.FAIL,"execution failed");}
     }
+
     @Test (priority = 4)
     public void registration () {
-        introScreen.clickRegister();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span")));}
+        try {
+            introScreen.clickRegister();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span")));
+        test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+        test.log(Status.FAIL,"execution failed");}
+        }
 
     @Test (priority = 5)
-    public void firstName(){introScreen.enterFirstName();}
+    public void firstName(){
+        try {
+            introScreen.enterFirstName();
+            test.log(Status.PASS,"executed successfully");
+        }catch (Exception e){
+        test.log(Status.FAIL,"execution failed");}
+        }
 
     @Test (priority = 6)
     public void email(){
