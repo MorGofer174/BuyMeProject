@@ -7,6 +7,7 @@ import Pages.IntroScreen;
 import Pages.PickBusinessScreen;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
@@ -16,9 +17,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.time.Duration;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+import static Main.Base.takeScreenShot;
 
 public class Main {
 
@@ -29,6 +31,7 @@ public class Main {
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
     Extra extra = new Extra();
     Singleton singleton = new Singleton();
+    String timeNow = String.valueOf(System.currentTimeMillis());
     InformationScreen informationScreen = new InformationScreen();
     public static ExtentReports extent= new ExtentReports();
     public static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
@@ -41,7 +44,7 @@ public class Main {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String cwd = System.getProperty("user.dir");
-        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extent.html");
+        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extentMor.html");
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO, "before test method");
     }
@@ -68,18 +71,18 @@ public class Main {
         try {
             extra.assertsErrors();
             test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
-    }
+        }catch (NoSuchElementException e){
+            test.log(Status.FAIL,"execution failed",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());}
+    } // tried the screenshots from here also.. didn't work
 
     @Test (priority = 4)
     public void registration () {
         try {
             introScreen.clickRegister();
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span")));
-        test.log(Status.PASS,"executed successfully");
+            test.log(Status.PASS,"executed successfully");
         }catch (Exception e){
-        test.log(Status.FAIL,"execution failed");}
+            test.log(Status.FAIL,"execution failed");}
         }
 
     @Test (priority = 5)
@@ -88,7 +91,7 @@ public class Main {
             introScreen.enterFirstName();
             test.log(Status.PASS,"executed successfully");
         }catch (Exception e){
-        test.log(Status.FAIL,"execution failed");}
+            test.log(Status.FAIL,"execution failed");}
         }
 
     @Test (priority = 6)
@@ -286,8 +289,8 @@ public class Main {
         try {
             informationScreen.pressPhone();
             test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+        }catch (NoSuchElementException e){
+            test.log(Status.FAIL,"execution failed",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());}
     }
 
     @Test (priority = 28)
@@ -296,7 +299,7 @@ public class Main {
             informationScreen.enterPhone();
             test.log(Status.PASS,"executed successfully");
         }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.FAIL,"execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());}
     }
 
     @Test (priority = 29)

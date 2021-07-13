@@ -2,7 +2,6 @@ package Pages;
 
 import Main.Base;
 import Main.Singleton;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +15,6 @@ import java.util.NoSuchElementException;
 public class InformationScreen extends Base {
 
     private static final WebDriver driver = Singleton.getDriverInstance();
-    String timeNow = String.valueOf(System.currentTimeMillis());
 
 
     public void enterReceiverName(){      // sends receiver name
@@ -50,7 +48,7 @@ public class InformationScreen extends Base {
             driver.findElement(picLocator).sendKeys("C:\\Users\\morg\\Desktop\\cutePuppy.jpg");
         }catch (NoSuchElementException e){
             e.printStackTrace();
-            MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
+       //     MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
         }
     }
 
@@ -62,7 +60,7 @@ public class InformationScreen extends Base {
             clickElement(By.cssSelector("path[class='circle']"));
     }
     public void enterPhone(){     // sends the phone number
-            clickElement(By.cssSelector("inp9ut[type='tel']"));
+            clickElement(By.xpath("//input[@name='sms' and @type='tel' and @data-parsley-mobile='mobile']"));
             sendKeys(By.cssSelector("input[type='tel']"),"0543114709");
     }
 
@@ -81,6 +79,7 @@ public class InformationScreen extends Base {
     }
 
     public void enterSenderPhone(){    // sends the sender's phone number
-            sendKeys(By.id("ember2179"), "0543223465");
+         clickElement(By.xpath("//input[@type=\"text\" and @data-parsley-mobile=\"mobile\"]"));
+         sendKeys(By.xpath("//input[@type=\"text\" and @data-parsley-mobile=\"mobile\"]"), "0543223465");
     }
 }

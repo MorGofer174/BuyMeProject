@@ -6,9 +6,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.NoSuchElementException;
-
 import static org.openqa.selenium.support.locators.RelativeLocator.withTagName;
 
 
@@ -35,14 +33,15 @@ public class IntroScreen extends Base {
             assertsText(nameWebElement, name);
         } catch (NoSuchElementException e) {
             MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
-        }
+        }  // tried the screenshots from here also..
     }
 
     public void enterEmail() {        // sends email and asserts
         By emailLocator = By.xpath("//input[@type='email']");
-        sendKeys(emailLocator, "afbbb8j3njgcyliju88@gmail.com");
+        clickElement(By.xpath("//input[@type='email']"));
+        sendKeys(emailLocator, "pleaseGodIHopeItWorks555@gmail.com");
         WebElement emailWebElement = driver.findElement(emailLocator);
-        assertsText(emailWebElement, "afbbb8j3njgcyliju88@gmail.com");
+        assertsText(emailWebElement, "pleaseGodIHopeItWorks555@gmail.com");
     }
 
     public void enterPassword() {     // sends password and asserts
