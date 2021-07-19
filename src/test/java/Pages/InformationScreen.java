@@ -2,6 +2,9 @@ package Pages;
 
 import Main.Base;
 import Main.Singleton;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +17,10 @@ import java.util.NoSuchElementException;
 
 public class InformationScreen extends Base {
 
-    private static final WebDriver driver = Singleton.getDriverInstance();
+    public static WebDriver driver = Singleton.getDriverInstance();
+    private static ExtentReports extent= new ExtentReports();
+    private static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
+    private final String timeNow = String.valueOf(System.currentTimeMillis());
 
 
     public void enterReceiverName(){      // sends receiver name
@@ -39,18 +45,18 @@ public class InformationScreen extends Base {
             sendKeys(blessingTextLocator, "happy birthday!! much love!!");
     }
     public void uploadPic(){       // uploads a pic
-        try {
             By picLocator = By.xpath("//input[@name='logo' and @type='file']");
             WebElement scrollElement = driver.findElement(picLocator);
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",scrollElement);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(picLocator));
+            try{
             driver.findElement(picLocator).sendKeys("C:\\Users\\morg\\Desktop\\cutePuppy.jpg");
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-       //     MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
+                test.pass("executed successfully", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            } catch (NoSuchElementException e) {
+                test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            }
         }
-    }
 
     public void pressContinueButton(){    // presses the continue button
             clickElement(By.id("ember2011"));
@@ -70,11 +76,7 @@ public class InformationScreen extends Base {
             By senderNameLocator = By.xpath("//input[@id='ember2170' and @maxlength='25']");
             WebElement senderNameElement = driver.findElement(senderNameLocator);
             String senderName = senderNameElement.getAttribute("value");
-        try {
             assertsText(senderNameElement,senderName);
-        }catch (NoSuchElementException e){
-            e.printStackTrace();
-        }
     }
 
     public void enterSenderPhone(){    // sends the sender's phone number

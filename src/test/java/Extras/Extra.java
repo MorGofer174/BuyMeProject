@@ -9,7 +9,7 @@ import org.testng.Assert;
 
 public class Extra extends Base {
 
-    private static final WebDriver driver = Singleton.getDriverInstance();
+    public static WebDriver driver = Singleton.getDriverInstance();
 
     public void pressEnterNoCredentials(){
         clickElement(By.cssSelector("button[type='submit'"));

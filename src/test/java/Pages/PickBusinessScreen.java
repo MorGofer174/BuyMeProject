@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class PickBusinessScreen extends Base {
 
-    private static WebDriver driver = Singleton.getDriverInstance();
+    public static WebDriver driver = Singleton.getDriverInstance();
 
     public void assertURL(){
         String URL = driver.getCurrentUrl();

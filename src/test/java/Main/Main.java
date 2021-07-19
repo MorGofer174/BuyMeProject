@@ -7,7 +7,6 @@ import Pages.IntroScreen;
 import Pages.PickBusinessScreen;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
@@ -17,29 +16,29 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.time.Duration;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
-import static Main.Base.takeScreenShot;
 
 public class Main {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
+    Singleton singleton = new Singleton();
     IntroScreen introScreen = new IntroScreen();
     HomeScreen homeScreen = new HomeScreen();
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
     Extra extra = new Extra();
-//    Singleton singleton = new Singleton();
-  //  String timeNow = String.valueOf(System.currentTimeMillis());
     InformationScreen informationScreen = new InformationScreen();
-    public static ExtentReports extent= new ExtentReports();
-    public static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
+    private static ExtentReports extent= new ExtentReports();
+    private static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
+ //   private final String timeNow = String.valueOf(System.currentTimeMillis());
 
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
+
         driver = Singleton.getDriverInstance();
-        Singleton singleton = new Singleton();
         String URL = singleton.getURL();
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -49,8 +48,6 @@ public class Main {
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO, "before test method");
 
-        String timeNow = String.valueOf(System.currentTimeMillis());
-        test.pass("details", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
     }
     @Test (priority = 1)
     public void enter (){
@@ -76,8 +73,7 @@ public class Main {
             extra.assertsErrors();
             test.log(Status.PASS,"executed successfully");
         }catch (NoSuchElementException e){
-
-            test.log(Status.FAIL,"execution failed",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver,timeNow)).build());}
+            test.log(Status.FAIL,"execution failed");}
     } // tried the screenshots from here also.. didn't work
 
     @Test (priority = 4)
@@ -295,7 +291,7 @@ public class Main {
             informationScreen.pressPhone();
             test.log(Status.PASS,"executed successfully");
         }catch (NoSuchElementException e){
-            test.log(Status.FAIL,"execution failed",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());}
+            test.log(Status.FAIL,"execution failed");}
     }
 
     @Test (priority = 28)
@@ -304,7 +300,7 @@ public class Main {
             informationScreen.enterPhone();
             test.log(Status.PASS,"executed successfully");
         }catch (Exception e){
-            test.log(Status.FAIL,"execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());}
+            test.log(Status.FAIL,"execution failed");}
     }
 
     @Test (priority = 29)
@@ -331,5 +327,17 @@ public class Main {
         test.log(Status.INFO, "finished");
         extent.flush();
         driver.quit();
-    }
-}
+    }}
+
+//    private static String takeScreenShot(WebDriver driver, String ImagesPath) {
+//        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+//        File screenShotFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
+//        File destinationFile = new File(ImagesPath + ".png");
+//        try {
+//            FileUtils.copyFile(screenShotFile, destinationFile);
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        return ImagesPath + ".png";
+

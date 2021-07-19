@@ -2,46 +2,39 @@ package Pages;
 
 import Main.Base;
 import Main.Singleton;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import java.util.NoSuchElementException;
+
 import static org.openqa.selenium.support.locators.RelativeLocator.withTagName;
 
 
 public class IntroScreen extends Base {
 
-    private static final WebDriver driver = Singleton.getDriverInstance();
-    String timeNow = String.valueOf(System.currentTimeMillis());
+    public static WebDriver driver = Singleton.getDriverInstance();
     public static String name = "Avi";
-
 
     public void clickEnter() {            // clicks on user enter
         clickElement(By.className("seperator-link"));
     }
 
     public void clickRegister() {         // clicks on registration
-        clickElement(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span"));
+            clickElement(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span"));
     }
 
     public void enterFirstName() {        // sends first name and asserts
-        try {
             By nameLocator = By.xpath("//input[@type='text']");
             WebElement nameWebElement = driver.findElement(nameLocator);
             nameWebElement.sendKeys(name);
             assertsText(nameWebElement, name);
-        } catch (NoSuchElementException e) {
-            MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
-        }  // tried the screenshots from here also..
     }
 
     public void enterEmail() {        // sends email and asserts
         By emailLocator = By.xpath("//input[@type='email']");
         clickElement(By.xpath("//input[@type='email']"));
-        sendKeys(emailLocator, "pleaseGodIHopeItWorks555@gmail.com");
+        sendKeys(emailLocator, "jlkjnkkhhlkml888@gmail.com");
         WebElement emailWebElement = driver.findElement(emailLocator);
-        assertsText(emailWebElement, "pleaseGodIHopeItWorks555@gmail.com");
+        assertsText(emailWebElement, "jlkjnkkhhlkml888@gmail.com");
     }
 
     public void enterPassword() {     // sends password and asserts
