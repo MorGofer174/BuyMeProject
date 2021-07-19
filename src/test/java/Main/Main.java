@@ -30,8 +30,8 @@ public class Main {
     HomeScreen homeScreen = new HomeScreen();
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
     Extra extra = new Extra();
-    Singleton singleton = new Singleton();
-    String timeNow = String.valueOf(System.currentTimeMillis());
+//    Singleton singleton = new Singleton();
+  //  String timeNow = String.valueOf(System.currentTimeMillis());
     InformationScreen informationScreen = new InformationScreen();
     public static ExtentReports extent= new ExtentReports();
     public static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
@@ -39,6 +39,7 @@ public class Main {
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
         driver = Singleton.getDriverInstance();
+        Singleton singleton = new Singleton();
         String URL = singleton.getURL();
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -47,6 +48,9 @@ public class Main {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extentMor.html");
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO, "before test method");
+
+        String timeNow = String.valueOf(System.currentTimeMillis());
+        test.pass("details", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
     }
     @Test (priority = 1)
     public void enter (){
@@ -72,7 +76,8 @@ public class Main {
             extra.assertsErrors();
             test.log(Status.PASS,"executed successfully");
         }catch (NoSuchElementException e){
-            test.log(Status.FAIL,"execution failed",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());}
+
+            test.log(Status.FAIL,"execution failed",MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver,timeNow)).build());}
     } // tried the screenshots from here also.. didn't work
 
     @Test (priority = 4)

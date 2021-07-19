@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 public  class Base {
     private static final WebDriver driver = Singleton.getDriverInstance();
-    static String timeNow = String.valueOf(System.currentTimeMillis());
+    private String timeNow = String.valueOf(System.currentTimeMillis());
     public static ExtentReports extent= new ExtentReports();
     public static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
 
@@ -27,11 +27,11 @@ public  class Base {
         } // i tried the screenshots with thr log and it didn't work, i don't know how to make it work!! :(
     }
 
-    public static void sendKeys(By locator, String text) {    // general method that sends keys to element
+    public void sendKeys(By locator, String text) {    // general method that sends keys to element
         try {
             driver.findElement(locator).sendKeys(text);
         } catch (NoSuchElementException e) {
-            MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build();
+            test.log(Status.FAIL, "failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(timeNow)).build());
         }  // also tried it without the log, still didn't work
     }
 
@@ -41,15 +41,27 @@ public  class Base {
     }
 
 
-    public static String takeScreenShot(String ImagesPath) {    // the screenshot method you gave us
+//    public static String takeScreenShot(String ImagesPath) {    // the screenshot method you gave us
+//        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+//        File screenShotFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
+//        File destinationFile = new File("\"C:\\Users\\morg\\Desktop\\buyme screenshots\\" + timeNow + ".png");
+//        try {
+//            FileUtils.copyFile(screenShotFile, destinationFile);
+//        } catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return ImagesPath + ".png";
+//    }
+    static String takeScreenShot(WebDriver driver, String ImagesPath) {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
         File screenShotFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        File destinationFile = new File("\"C:\\Users\\morg\\Desktop\\buyme screenshots\\" + timeNow + ".png");
+        File destinationFile = new File(ImagesPath + ".png");
         try {
             FileUtils.copyFile(screenShotFile, destinationFile);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
         return ImagesPath + ".png";
     }
 
