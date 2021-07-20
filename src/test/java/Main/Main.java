@@ -31,11 +31,13 @@ public class Main {
     IntroScreen introScreen = new IntroScreen();
     HomeScreen homeScreen = new HomeScreen();
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
+    DB db = new DB();
     Extra extra = new Extra();
     InformationScreen informationScreen = new InformationScreen();
     private static ExtentReports extent= new ExtentReports();
     private static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
     private final String timeNow = String.valueOf(System.currentTimeMillis());
+
 
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
@@ -50,6 +52,10 @@ public class Main {
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO, "before test method");
 
+    }
+    @Test
+    public void createDBTable(){
+        db.creat
     }
     @Test (priority = 1)
     public void enter (){
