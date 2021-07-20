@@ -2,9 +2,6 @@ package Pages;
 
 import Main.Base;
 import Main.Singleton;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,14 +10,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
 
 public class InformationScreen extends Base {
 
     public static WebDriver driver = Singleton.getDriverInstance();
-    private static ExtentReports extent= new ExtentReports();
-    private static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
-    private final String timeNow = String.valueOf(System.currentTimeMillis());
 
 
     public void enterReceiverName(){      // sends receiver name
@@ -50,12 +43,7 @@ public class InformationScreen extends Base {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",scrollElement);
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
             wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(picLocator));
-            try{
             driver.findElement(picLocator).sendKeys("C:\\Users\\morg\\Desktop\\cutePuppy.jpg");
-                test.pass("executed successfully", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
-            } catch (NoSuchElementException e) {
-                test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
-            }
         }
 
     public void pressContinueButton(){    // presses the continue button

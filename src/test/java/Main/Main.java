@@ -7,6 +7,7 @@ import Pages.IntroScreen;
 import Pages.PickBusinessScreen;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
@@ -18,8 +19,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
+
+import static Main.Base.takeScreenShot;
 
 public class Main {
 
@@ -33,7 +35,7 @@ public class Main {
     InformationScreen informationScreen = new InformationScreen();
     private static ExtentReports extent= new ExtentReports();
     private static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
- //   private final String timeNow = String.valueOf(System.currentTimeMillis());
+    private final String timeNow = String.valueOf(System.currentTimeMillis());
 
     @BeforeClass
     public void runOnceBeforeClass() {  // opens chrome browser with URL
@@ -53,127 +55,140 @@ public class Main {
     public void enter (){
         try {
             introScreen.clickEnter();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-        test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
-    @Test (priority = 2)
-    public void enterNoCredentials(){
-        try {
-            extra.pressEnterNoCredentials();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
-    }
-
-    @Test(priority = 3)
-    public void assertErrors(){
-        try {
-            extra.assertsErrors();
-            test.log(Status.PASS,"executed successfully");
-        }catch (NoSuchElementException e){
-            test.log(Status.FAIL,"execution failed");}
-    } // tried the screenshots from here also.. didn't work
-
+//    @Test (priority = 2)
+//    public void enterNoCredentials(){
+//        try {
+//            extra.pressEnterNoCredentials();
+//            test.log(Status.PASS, "executed successfully");
+//        } catch (Exception e) {
+//            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+//        }
+//    }
+//
+//    @Test(priority = 3)
+//    public void assertErrors() {
+//        try {
+//            extra.assertsErrors();
+//            test.log(Status.PASS, "executed successfully");
+//        } catch (Exception e) {
+//            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+//        }
+//    }
     @Test (priority = 4)
     public void registration () {
         try {
             introScreen.clickRegister();
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span")));
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[data-ember-action='1405']")));
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
         }
 
     @Test (priority = 5)
     public void firstName(){
         try {
             introScreen.enterFirstName();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
         }
 
     @Test (priority = 6)
     public void email(){
         try {
             introScreen.enterEmail();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 7)
     public void password(){
         try {
             introScreen.enterPassword();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 8)
     public void passwordAgain(){
         try {
             introScreen.re_enterPassword();
-        test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-        test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 9)
-    public void register(){
+    public void register() {
         try {
             introScreen.confirmRegistration();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 10)
     public void openAmount(){
         try {
             homeScreen.openAmountList();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 11)
     public void chooseAmount(){
         try {
             homeScreen.chooseAmount();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 12)
     public void openRegion(){
         try {
             homeScreen.openRegionList();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 13)
     public void chooseRegion(){
         try {
             homeScreen.chooseRegion();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 14)
     public void openCategory(){
         try {
             homeScreen.openCategoryList();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
 
     }
 
@@ -181,144 +196,160 @@ public class Main {
     public void chooseCategory(){
         try {
             homeScreen.chooseCategory();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 16)
     public void findGift(){
         try {
             homeScreen.pressFindGift();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 17)
     public void assertsPickBusinessURL(){
         try {
             pickBusiness.assertURL();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 18)
     public void picksBusiness(){
         try {
             pickBusiness.pickABusiness();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 19)
     public void picksAmount(){
         try {
             pickBusiness.pickAmount();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 20)
     public void sendReceiverName(){
         try {
             informationScreen.enterReceiverName();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 21)
     public void openEvents(){
         try {
             informationScreen.openForWhatEvent();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 22)
     public void pickEvent(){
         try {
             informationScreen.pickEvent();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 23)
     public void clearsGreetings(){
         try {
             informationScreen.clearBlessingText();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 24)
     public void writGreetings(){
         try {
             informationScreen.sendBlessingText();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 25)
     public void uploadsPic(){
         try {
             informationScreen.uploadPic();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 26)
     public void pressContinue(){
         try {
             informationScreen.pressContinueButton();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 27)
     public void choosePhone(){
         try {
             informationScreen.pressPhone();
-            test.log(Status.PASS,"executed successfully");
-        }catch (NoSuchElementException e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 28)
     public void writePhone (){
         try {
             informationScreen.enterPhone();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 29)
     public void assertSendersName (){
         try {
             informationScreen.assertSenderName();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
     @Test (priority = 30)
     public void senderPhone(){
         try {
             informationScreen.enterSenderPhone();
-            test.log(Status.PASS,"executed successfully");
-        }catch (Exception e){
-            test.log(Status.FAIL,"execution failed");}
+            test.log(Status.PASS, "executed successfully");
+        } catch (Exception e) {
+            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+        }
     }
 
 
@@ -327,7 +358,8 @@ public class Main {
         test.log(Status.INFO, "finished");
         extent.flush();
         driver.quit();
-    }}
+    }
+    }
 
 //    private static String takeScreenShot(WebDriver driver, String ImagesPath) {
 //        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;

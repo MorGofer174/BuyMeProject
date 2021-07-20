@@ -5,6 +5,10 @@ import Main.Singleton;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.withTagName;
 
@@ -13,20 +17,23 @@ public class IntroScreen extends Base {
 
     public static WebDriver driver = Singleton.getDriverInstance();
     public static String name = "Avi";
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
 
     public void clickEnter() {            // clicks on user enter
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("seperator-link")));
         clickElement(By.className("seperator-link"));
     }
 
     public void clickRegister() {         // clicks on registration
-            clickElement(By.xpath("//*[@id=\"ember882\"]/div/div[1]/div/div/div[3]/div[1]/span"));
+        clickElement(By.cssSelector("span[data-ember-action='1405']"));
     }
 
     public void enterFirstName() {        // sends first name and asserts
-            By nameLocator = By.xpath("//input[@type='text']");
-            WebElement nameWebElement = driver.findElement(nameLocator);
-            nameWebElement.sendKeys(name);
-            assertsText(nameWebElement, name);
+        By nameLocator = By.xpath("//input[@type='text']");
+        WebElement nameWebElement = driver.findElement(nameLocator);
+        nameWebElement.sendKeys(name);
+        assertsText(nameWebElement, name);
     }
 
     public void enterEmail() {        // sends email and asserts
