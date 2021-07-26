@@ -39,9 +39,9 @@ public class IntroScreen extends Base {
     public void enterEmail() {        // sends email and asserts
         By emailLocator = By.xpath("//input[@type='email']");
         clickElement(By.xpath("//input[@type='email']"));
-        sendKeys(emailLocator, "jlkjnkkhhlkml888@gmail.com");
+        sendKeys(emailLocator, "jlkjnkkhhkuhylkml888@gmail.com");
         WebElement emailWebElement = driver.findElement(emailLocator);
-        assertsText(emailWebElement, "jlkjnkkhhlkml888@gmail.com");
+        assertsText(emailWebElement, "jlkjnkkhhkuhylkml888@gmail.com");
     }
 
     public void enterPassword() {     // sends password and asserts

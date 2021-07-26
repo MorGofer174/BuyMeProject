@@ -18,20 +18,22 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import static Main.Base.takeScreenShot;
 
-public class Main {
+public class Main<DB> {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
+    private static Connection con;
     Singleton singleton = new Singleton();
     IntroScreen introScreen = new IntroScreen();
     HomeScreen homeScreen = new HomeScreen();
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
-    DB db = new DB();
     Extra extra = new Extra();
     InformationScreen informationScreen = new InformationScreen();
     private static ExtentReports extent= new ExtentReports();
@@ -40,9 +42,9 @@ public class Main {
 
 
     @BeforeClass
-    public void runOnceBeforeClass() {  // opens chrome browser with URL
-
+    public void runOnceBeforeClass() throws SQLException {  // opens chrome browser with URL
         driver = Singleton.getDriverInstance();
+        DatabaseConnection con = Singleton.getConnectionInstance();
         String URL = singleton.getURL();
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -54,8 +56,8 @@ public class Main {
 
     }
     @Test
-    public void createDBTable(){
-        db.creat
+    public void createDBTable() throws SQLException {
+        DBMor.createTable(con);
     }
     @Test (priority = 1)
     public void enter (){
