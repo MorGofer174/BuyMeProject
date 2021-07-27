@@ -1,9 +1,7 @@
 package Main;
 
-import com.mysql.cj.jdbc.JdbcConnection;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.devtools.database.Database;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.w3c.dom.Document;
 
@@ -16,12 +14,12 @@ import java.sql.SQLException;
 
 public class Singleton {
         private static WebDriver driver;
-        private static final String USER_NAME = "sql6427759";
-        private static final String DATABASE_NAME = "sql6427759";
-        private static final String PASSWORD = "QHSDxAB9LF";
-        private static final String PORT = "3306";
-        private static final String SERVER = "sql6.freemysqlhosting.net";
-        private static DatabaseConnection con;
+        private static String USER_NAME;
+        private static String DATABASE_NAME;
+        private static String PASSWORD;
+        private static String PORT;
+        private static String SERVER;
+        private static Connection con;
 
         public static WebDriver getDriverInstance() {
             if(driver == null){
@@ -42,15 +40,42 @@ public class Singleton {
             return driver;
         }
 
-        public static DatabaseConnection getConnectionInstance() throws SQLException {
+        public static Connection getConnectionInstance() throws SQLException {
             if(con == null){
-                Connection con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
-                con = new ;
+                String USER_NAME = "sql6427759";
+                String DATABASE_NAME = "sql6427759";
+                String PASSWORD = "QHSDxAB9LF";
+                String PORT = "3306";
+                String SERVER = "sql6.freemysqlhosting.net";
+                con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
             }
             return con;
         }
 
-        public static String getURL (){
+//            import java.sql.Connection;
+//    import java.sql.DriverManager;
+
+//    public class ConexionTest {
+//        private static Connection conn = null;
+//
+//        static Connection getConnection() throws Exception {
+//            if (conn == null) {
+//                String url = "jdbc:mysql://localhost:3306/";
+//                String dbName = "test";
+//                String driver = "com.mysql.jdbc.Driver";
+//                String userName = "userparatest";
+//                String password = "userparatest";
+//
+//                Class.forName(driver).newInstance();
+//                conn = DriverManager.getConnection(url + dbName, userName, password);
+//            }
+//
+//            return conn;
+//        }
+//    }
+
+
+    public static String getURL (){
             String type = null;
             try {
                 type = getData("URL");

@@ -29,7 +29,7 @@ public class Main<DB> {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
-    private static Connection con;
+    Connection con;
     Singleton singleton = new Singleton();
     IntroScreen introScreen = new IntroScreen();
     HomeScreen homeScreen = new HomeScreen();
@@ -40,11 +40,14 @@ public class Main<DB> {
     private static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
     private final String timeNow = String.valueOf(System.currentTimeMillis());
 
+    public Main() throws SQLException {
+    }
+
 
     @BeforeClass
     public void runOnceBeforeClass() throws SQLException {  // opens chrome browser with URL
         driver = Singleton.getDriverInstance();
-        DatabaseConnection con = Singleton.getConnectionInstance();
+        con = Singleton.getConnectionInstance();
         String URL = singleton.getURL();
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

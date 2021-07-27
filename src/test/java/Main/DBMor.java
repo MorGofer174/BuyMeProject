@@ -26,11 +26,15 @@ package Main;
 import java.sql.*;
 
 public class DBMor {
-    private static final String USER_NAME = "sql6427759";
-    private static final String DATABASE_NAME = "sql6427759";
-    private static final String PASSWORD = "QHSDxAB9LF";
-    private static final String PORT = "3306";
-    private static final String SERVER = "sql6.freemysqlhosting.net";
+    Connection con = Singleton.getConnectionInstance();
+    private static String USER_NAME;
+    private static String DATABASE_NAME = "sql6427759";
+    private static String PASSWORD;
+    private static String PORT;
+    private static String SERVER;
+
+    public DBMor() throws SQLException {
+    }
 
     public static void main(String[] args) throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
