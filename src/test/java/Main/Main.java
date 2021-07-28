@@ -58,10 +58,20 @@ public class Main<DB> {
         test.log(Status.INFO, "before test method");
 
     }
+//    @Test
+//    public void createDBTable() throws SQLException {
+//        DBMor.createTable(con);
+//    }
+//    @Test
+//    public void insertTableData() throws SQLException {
+//        DBMor.insertData(con, 1, "URL","https://www.buyme.co.il");
+//        DBMor.insertData(con, 2, "BROWSER","chrome");
+//    }
     @Test
-    public void createDBTable() throws SQLException {
-        DBMor.createTable(con);
+    public void getData() throws SQLException {
+        DBMor.getTableURL(con);
     }
+
     @Test (priority = 1)
     public void enter (){
         try {

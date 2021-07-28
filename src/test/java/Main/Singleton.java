@@ -20,9 +20,25 @@ public class Singleton {
         private static String PORT;
         private static String SERVER;
         private static Connection con;
+        static DBMor dbMor;
 
-        public static WebDriver getDriverInstance() {
+    static {
+        try {
+            dbMor = new DBMor();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public Singleton() throws SQLException {
+    }
+
+    public static WebDriver getDriverInstance() {
             if(driver == null){
+//                if (con == null){
+//
+//                }
+
                 String type = null;
                 try {
                     type = getData("browserType");
@@ -75,17 +91,24 @@ public class Singleton {
 //    }
 
 
-    public static String getURL (){
-            String type = null;
+    public static String getURL () throws SQLException {
+        String type = null;
+        if (!con.isClosed()) {
+            try {
+                type = DBMor.config_URL_data;
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
             try {
                 type = getData("URL");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            driver.get(type);
-
-            return type;
         }
+        driver.get(type);
+        return type;
+    }
 
     static String getData(String keyName) throws Exception{
         ClassLoader classLoader = Singleton.class.getClassLoader();
