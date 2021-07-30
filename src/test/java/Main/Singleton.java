@@ -29,14 +29,18 @@ public class Singleton {
         }
     }
 
-    public static Connection getConnectionInstance() throws SQLException {
+    public static Connection getConnectionInstance() {
         if(con == null){
             String USER_NAME = "sql6427759";
             String DATABASE_NAME = "sql6427759";
             String PASSWORD = "QHSDxAB9LF";
             String PORT = "3306";
             String SERVER = "sql6.freemysqlhosting.net";
-            con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
+            try {
+                con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
         return con;
     }
@@ -45,7 +49,7 @@ public class Singleton {
         if(driver == null){
             String browserType = null;
             try {
-                if (!con.isClosed()) {
+                if (con != null && !con.isClosed()) {
                     try{
                     browserType = dbMor.config_Browser_data;
                 } catch (Exception e) {
@@ -74,7 +78,7 @@ public class Singleton {
 
     public static String getURL () throws SQLException {
         String urlType = null;
-        if (!con.isClosed()) {
+        if (con != null && !con.isClosed()) {
             try {
                 urlType = dbMor.config_URL_data;
             } catch (Exception e) {

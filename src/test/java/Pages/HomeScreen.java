@@ -10,7 +10,7 @@ import java.util.List;
 
 public class HomeScreen extends Base {
 
-    private static final WebDriver driver = Singleton.getDriverInstance();
+    private static WebDriver driver = Singleton.getDriverInstance();
 
     public void openAmountList(){      // clicks on the first combo box choose amount
             List<WebElement> list = driver.findElements(By.className("chosen-container-single"));
