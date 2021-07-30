@@ -48,6 +48,7 @@ public class Main<DB> {
     public void runOnceBeforeClass() throws SQLException {  // opens chrome browser with URL
         driver = Singleton.getDriverInstance();
         con = Singleton.getConnectionInstance();
+        DBMor.getTableURL(con);
         String URL = singleton.getURL();
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -68,7 +69,8 @@ public class Main<DB> {
 //        DBMor.insertData(con, 2, "BROWSER","chrome");
 //    }
     @Test
-    public void getData() throws SQLException {
+    public void getData() throws SQLException {   //gets the browser & url from DB connection
+        DBMor.getTableBrowser(con);
         DBMor.getTableURL(con);
     }
 

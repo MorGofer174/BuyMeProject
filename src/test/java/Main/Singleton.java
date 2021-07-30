@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.w3c.dom.Document;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -20,15 +19,15 @@ public class Singleton {
         private static String PORT;
         private static String SERVER;
         private static Connection con;
-        static DBMor dbMor;
+  //      static DBMor dbMor;
 
-    static {
-        try {
-            dbMor = new DBMor();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+//    static {
+//        try {
+//            dbMor = new DBMor();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
 
     public Singleton() throws SQLException {
     }
@@ -93,9 +92,10 @@ public class Singleton {
 
     public static String getURL () throws SQLException {
         String type = null;
+        DBMor dbMor = new DBMor();
         if (!con.isClosed()) {
             try {
-                type = DBMor.config_URL_data;
+                type = dbMor.config_URL_data;
             }catch (Exception e) {
                 e.printStackTrace();
             }

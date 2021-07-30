@@ -33,10 +33,11 @@ public class DBMor {
     private static String PORT;
     private static String SERVER;
     public static String config_URL_data;
-    public String config_Browser_data;
+    public static String config_Browser_data;
 
     public DBMor() throws SQLException {
     }
+
 
     public static void main(String[] args) throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
@@ -57,23 +58,25 @@ public class DBMor {
         String statementToExecute = "INSERT INTO " + DATABASE_NAME + ".config (`config_id`, `config_name`, `config_data`) VALUES ('" + config_id + "', '" + config_name + "','" + config_data + "');";
         con.createStatement().execute(statementToExecute);
     }
-    public static void getTableURL(Connection con) throws SQLException {
-        String statementToExecute = "SELECT `config_data` FROM " + DATABASE_NAME + ".config WHERE `config_id` = '1';";
-        Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery(statementToExecute);
-        while(rs.next()){
-            String config_URL_data = rs.getString("config_data");
-            System.out.println(config_URL_data);
-        }
-        rs.close();
-    }
+
     public static void getTableBrowser(Connection con) throws SQLException {
         String statementToExecute = "SELECT `config_data` FROM " + DATABASE_NAME + ".config WHERE `config_id` = '2';";
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(statementToExecute);
         while(rs.next()){
-            String config_Browser_data = rs.getString("config_data");
+            config_Browser_data = rs.getString("config_data");
             System.out.println(config_Browser_data);
+        }
+        rs.close();
+    }
+
+    public static void getTableURL(Connection con) throws SQLException {
+        String statementToExecute = "SELECT `config_data` FROM " + DATABASE_NAME + ".config WHERE `config_id` = '1';";
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery(statementToExecute);
+        while(rs.next()){
+            config_URL_data = rs.getString("config_data");
+            System.out.println(config_URL_data);
         }
         rs.close();
     }
