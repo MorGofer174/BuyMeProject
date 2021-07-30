@@ -19,95 +19,76 @@ public class Singleton {
         private static String PORT;
         private static String SERVER;
         private static Connection con;
-  //      static DBMor dbMor;
+        static DBMor dbMor;
 
-//    static {
-//        try {
-//            dbMor = new DBMor();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
-
-    public Singleton() throws SQLException {
+    static {
+        try {
+            dbMor = new DBMor();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
-    public static WebDriver getDriverInstance() {
-            if(driver == null){
-//                if (con == null){
-//
-//                }
+    public static Connection getConnectionInstance() throws SQLException {
+        if(con == null){
+            String USER_NAME = "sql6427759";
+            String DATABASE_NAME = "sql6427759";
+            String PASSWORD = "QHSDxAB9LF";
+            String PORT = "3306";
+            String SERVER = "sql6.freemysqlhosting.net";
+            con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
+        }
+        return con;
+    }
 
-                String type = null;
-                try {
-                    type = getData("browserType");
+    public static WebDriver getDriverInstance(){
+        if(driver == null){
+            String browserType = null;
+            try {
+                if (!con.isClosed()) {
+                    try{
+                    browserType = dbMor.config_Browser_data;
+                } catch (Exception e) {
+                e.printStackTrace();
+            }
+                } else {
+                    try{
+                    browserType = getData("browserType");
                 } catch (Exception e) {
                     e.printStackTrace();
-                }
-                if(type.equals("Chrome")){
+                }}
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            if(browserType.equals("Chrome")){
                     System.setProperty("webdriver.chrome.driver", "C:\\Users\\morg\\Downloads\\chromedriver_win32\\chromedriver.exe");
                     driver = new ChromeDriver();
-                }else if(type.equals("FF")){
+                   }else if(browserType.equals("FF")){
                     System.setProperty("webdriver.firefox.driver", "C:\\Users\\morg\\Downloads\\geckodriver-v0.29.1-win64\\geckodriver.exe");
                     driver = new FirefoxDriver();}
-                driver.manage().window().maximize();
+                    driver.manage().window().maximize();
             }
             return driver;
-        }
-
-        public static Connection getConnectionInstance() throws SQLException {
-            if(con == null){
-                String USER_NAME = "sql6427759";
-                String DATABASE_NAME = "sql6427759";
-                String PASSWORD = "QHSDxAB9LF";
-                String PORT = "3306";
-                String SERVER = "sql6.freemysqlhosting.net";
-                con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
-            }
-            return con;
-        }
-
-//            import java.sql.Connection;
-//    import java.sql.DriverManager;
-
-//    public class ConexionTest {
-//        private static Connection conn = null;
-//
-//        static Connection getConnection() throws Exception {
-//            if (conn == null) {
-//                String url = "jdbc:mysql://localhost:3306/";
-//                String dbName = "test";
-//                String driver = "com.mysql.jdbc.Driver";
-//                String userName = "userparatest";
-//                String password = "userparatest";
-//
-//                Class.forName(driver).newInstance();
-//                conn = DriverManager.getConnection(url + dbName, userName, password);
-//            }
-//
-//            return conn;
-//        }
-//    }
+    }
 
 
     public static String getURL () throws SQLException {
-        String type = null;
-        DBMor dbMor = new DBMor();
+        String urlType = null;
         if (!con.isClosed()) {
             try {
-                type = dbMor.config_URL_data;
-            }catch (Exception e) {
+                urlType = dbMor.config_URL_data;
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                type = getData("URL");
+                urlType = getData("URL");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        driver.get(type);
-        return type;
+        driver.get(urlType);
+        return urlType;
     }
 
     static String getData(String keyName) throws Exception{

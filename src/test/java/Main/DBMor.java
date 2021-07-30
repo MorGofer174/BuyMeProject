@@ -60,7 +60,7 @@ public class DBMor {
     }
 
     public static void getTableBrowser(Connection con) throws SQLException {
-        String statementToExecute = "SELECT `config_data` FROM " + DATABASE_NAME + ".config WHERE `config_id` = '2';";
+        String statementToExecute = "SELECT `config_data` FROM " + DATABASE_NAME + ".config WHERE `config_name` = `BROWSER`;";
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(statementToExecute);
         while(rs.next()){
