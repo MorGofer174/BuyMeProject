@@ -18,7 +18,7 @@ public class Singleton {
         private static String PASSWORD;
         private static String PORT;
         private static String SERVER;
-        private static Connection con;
+        public static Connection con;
         static DBMor dbMor;
 
     static {
@@ -29,27 +29,25 @@ public class Singleton {
         }
     }
 
-    public static Connection getConnectionInstance() {
-        if(con == null){
-            String USER_NAME = "sql6427759";
-            String DATABASE_NAME = "sql6427759";
-            String PASSWORD = "QHSDxAB9LF";
-            String PORT = "3306";
-            String SERVER = "sql6.freemysqlhosting.net";
-            try {
-                con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+    public static Connection getConnectionInstance() throws SQLException {
+        String USER_NAME = "sql6427759";
+        String DATABASE_NAME = "sql6427759";
+        String PASSWORD = "QHSDxAB9LF";
+        String PORT = "3306";
+        String SERVER = "sql6.freemysqlhosting.net";
+        if (con == null) {
+               con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
             }
-        }
         return con;
     }
 
     public static WebDriver getDriverInstance(){
+
         if(driver == null){
             String browserType = null;
             try {
-                if (con != null && !con.isClosed()) {
+                if (con != null) {
+                    if (!con.isClosed())
                     try{
                     browserType = dbMor.config_Browser_data;
                 } catch (Exception e) {
@@ -64,10 +62,10 @@ public class Singleton {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            if(browserType.equals("Chrome")){
+            if(browserType != null && browserType.equals("Chrome")){
                     System.setProperty("webdriver.chrome.driver", "C:\\Users\\morg\\Downloads\\chromedriver_win32\\chromedriver.exe");
                     driver = new ChromeDriver();
-                   }else if(browserType.equals("FF")){
+                   }else if(browserType != null && browserType.equals("FF")){
                     System.setProperty("webdriver.firefox.driver", "C:\\Users\\morg\\Downloads\\geckodriver-v0.29.1-win64\\geckodriver.exe");
                     driver = new FirefoxDriver();}
                     driver.manage().window().maximize();

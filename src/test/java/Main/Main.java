@@ -29,7 +29,7 @@ public class Main<DB> {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
-    public static Connection con;
+    public static Connection conInstance;
     Singleton singleton = new Singleton();
     IntroScreen introScreen = new IntroScreen();
     HomeScreen homeScreen = new HomeScreen();
@@ -45,8 +45,15 @@ public class Main<DB> {
 
 
     @BeforeClass
-    public void runOnceBeforeClass() throws SQLException {  //
-        driver = Singleton.getDriverInstance();
+    public void runOnceBeforeClass() throws SQLException, InterruptedException {  //
+        conInstance = singleton.getConnectionInstance();
+//        DBMor.createTable(con);
+//        DBMor.insertData(con, 1, "URL","https://www.buyme.co.il");
+//        DBMor.insertData(con, 2, "BROWSER","chrome");
+//        DBMor.updateDB(con,2);
+        DBMor.getTableBrowser(conInstance);
+        DBMor.getTableURL(conInstance);
+        driver = singleton.getDriverInstance();
         String URL = singleton.getURL();
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -55,7 +62,7 @@ public class Main<DB> {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extentMor.html");
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO, "before test method");
-        con = Singleton.getConnectionInstance();
+
 
     }
 //    @Test

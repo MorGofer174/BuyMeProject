@@ -57,4 +57,9 @@ public class DBMor {
         }
         rs.close();
     }
+    public static void updateDB (Connection con, int config_id) throws SQLException {
+        String statementToExecute = "UPDATE `" + DATABASE_NAME + "`.`config` SET `config_data`='Chrome' WHERE `config_id`='2';";
+        con.createStatement().executeUpdate(statementToExecute);
+
+    }
 }

@@ -6,9 +6,21 @@ import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 
 public  class Base {
+    public static Connection con;
+
+    static {
+        try {
+            con = Singleton.getConnectionInstance();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     public static WebDriver driver = Singleton.getDriverInstance();
 
 
