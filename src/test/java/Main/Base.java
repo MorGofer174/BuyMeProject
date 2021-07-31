@@ -13,9 +13,7 @@ import java.sql.SQLException;
 
 public  class Base {
     public static Connection con;
-    File ByuMeFile = new File("C:\\BuyMe2TestResults.txt");
     public static FileWriter fileWriter;
-    private static String testResult;
 
     static {
         try {
@@ -70,11 +68,12 @@ public  class Base {
             Assert.assertEquals(value, text);
     }
 
-    public void writeTestResult(Connection con, int test_id, String test_date, String test_result) throws SQLException { // saves the test results in DB table, if there is no connection - writes to txt file
+    // saves the test results in DB table, if there is no connection - writes to txt file
+    public void writeTestResult(Connection con, int test_id, String test_date, String test_result) throws SQLException {
         if (con != null && !con.isClosed()){
             DBMor.writeToLog(con,test_id,test_date,test_result);}
         else {
-            testResult = ""+ test_id+"+"+test_date+"+"+test_result+"";
+            String testResult = ""+ test_id+"+"+test_date+"+"+test_result+"";
             saveResultsToFile(testResult);
         }
         }

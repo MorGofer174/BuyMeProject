@@ -1,14 +1,9 @@
 package Main;
 
-import Extras.Extra;
 import Pages.HomeScreen;
 import Pages.InformationScreen;
 import Pages.IntroScreen;
 import Pages.PickBusinessScreen;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,43 +17,32 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-public class Main<DB> extends Base {
+public class Main extends Base {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
     public static Connection conInstance;
-    Singleton singleton = new Singleton();
     IntroScreen introScreen = new IntroScreen();
     HomeScreen homeScreen = new HomeScreen();
     PickBusinessScreen pickBusiness = new PickBusinessScreen();
-    Extra extra = new Extra();
     InformationScreen informationScreen = new InformationScreen();
-    private static ExtentReports extent= new ExtentReports();
-    private static ExtentTest test = extent.createTest("BuyMeSanity", "MyFirstLog");
     private final String timeNow = String.valueOf(System.currentTimeMillis());
-
-    public Main() throws SQLException {
-    }
 
 
     @BeforeClass
-    public void runOnceBeforeClass() throws SQLException, InterruptedException {  //
-        conInstance = singleton.getConnectionInstance();
-//        DBMor.createTable(con);
-//        DBMor.insertData(con, 1, "URL","https://www.buyme.co.il");
-//        DBMor.insertData(con, 2, "BROWSER","Chrome");
+    public void runOnceBeforeClass() throws SQLException {
+        conInstance = Singleton.getConnectionInstance();
+//      DBMor.createTable(con);   // TODO - remove "//" only in first run
+//      DBMor.insertData(con, 1, "URL","https://www.buyme.co.il"); // TODO - remove "//" only in first run
+//      DBMor.insertData(con, 2, "BROWSER","Chrome"); // TODO - remove "//" only in first run
         DBMor.getTableURL(conInstance);
-        driver = singleton.getDriverInstance();
-        String URL = singleton.getURL();
+        driver = Singleton.getDriverInstance();
+        String URL = Singleton.getURL();
         driver.get(URL);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        String cwd = System.getProperty("user.dir");
-        ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extentMor.html");
-        extent.attachReporter(htmlReporter);
-        test.log(Status.INFO, "before test method");
-     //   DBMor.createLogTable(con);
-   //     DBMor.clearLog(con);
+//      DBMor.clearLog(con);  // TODO - remove "//" only if needed to run the test again
+//      DBMor.createLogTable(con); // TODO - remove "//" only in first run
 
 
     }

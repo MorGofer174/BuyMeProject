@@ -13,11 +13,6 @@ import java.sql.SQLException;
 
 public class Singleton {
         private static WebDriver driver;
-        private static String USER_NAME;
-        private static String DATABASE_NAME;
-        private static String PASSWORD;
-        private static String PORT;
-        private static String SERVER;
         public static Connection con;
         static DBMor dbMor;
 
@@ -29,9 +24,8 @@ public class Singleton {
         }
     }
 
-    public static Connection getConnectionInstance() throws SQLException {  // setting db connection instance
+    public static Connection getConnectionInstance() throws SQLException {  // setting DB connection instance
         String USER_NAME = "sql6427759";
-        String DATABASE_NAME = "sql6427759";
         String PASSWORD = "QHSDxAB9LF";
         String PORT = "3306";
         String SERVER = "sql6.freemysqlhosting.net";
@@ -50,7 +44,7 @@ public class Singleton {
                     if (!con.isClosed())
                     try{
                         DBMor.getTableBrowser(con);
-                    browserType = dbMor.config_Browser_data;
+                    browserType = DBMor.config_Browser_data;
                 } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -74,12 +68,12 @@ public class Singleton {
             return driver;
     }
 
-
-    public static String getURL () throws SQLException {  // getting URL from DB , in case there is no connection - from the XML
+    // getting URL from DB , in case there is no connection - from the XML
+    public static String getURL () throws SQLException {
         String urlType = null;
         if (con != null && !con.isClosed()) {
             try {
-                urlType = dbMor.config_URL_data;
+                urlType = DBMor.config_URL_data;
             } catch (Exception e) {
                 e.printStackTrace();
             }
