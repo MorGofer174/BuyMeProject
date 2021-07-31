@@ -23,9 +23,7 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-import static Main.Base.takeScreenShot;
-
-public class Main<DB> {
+public class Main<DB> extends Base {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
@@ -61,17 +59,18 @@ public class Main<DB> {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extentMor.html");
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO, "before test method");
+ //       DBMor.createLogTable(con);
 
 
     }
 
     @Test (priority = 1)
-    public void enter (){
+    public void enter () throws SQLException {
         try {
             introScreen.clickEnter();
-            test.log(Status.PASS, "executed successfully");
+            writeTestResult(con,1,timeNow,"pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 1, timeNow, "fail");
         }
     }
 // Extra Tests
@@ -96,13 +95,13 @@ public class Main<DB> {
 //        }
 //    }
     @Test (priority = 4)
-    public void registration () {
+    public void registration () throws SQLException {
         try {
             introScreen.clickRegister();
             wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[data-ember-action='1405']")));
-            test.log(Status.PASS, "executed successfully");
+            writeTestResult(con,2,timeNow,"pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 2, timeNow, "fail");
         }
         }
 

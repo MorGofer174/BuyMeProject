@@ -5,6 +5,7 @@ import org.openqa.selenium.*;
 import org.testng.Assert;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,6 +13,38 @@ import java.sql.SQLException;
 
 public  class Base {
     public static Connection con;
+    File ByuMeFile = new File("C:\\BuyMe2TestResults.txt");
+    public static FileWriter fileWriter;
+    private static String testResult;
+
+    static {
+        try {
+            fileWriter = new FileWriter("C:\\BuyMe2TestResults.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveResultsToFile(String testResult) { // saves the result array to file
+        try {
+            File ByuMeFile = new File("C:\\BuyMe2TestResults.txt");
+            if (ByuMeFile.createNewFile()) {
+                System.out.println("File created: " + ByuMeFile.getName());
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+
+        try {
+            FileWriter writer = new FileWriter("C:\\BuyMe2TestResults.txt", true);
+            writer.write("\n" + testResult);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+    }
 
     static {
         try {
@@ -36,6 +69,16 @@ public  class Base {
         String value = element.getAttribute("value");
             Assert.assertEquals(value, text);
     }
+
+    public void writeTestResult(Connection con, int test_id, String test_date, String test_result) throws SQLException {
+        if (con == null && !con.isClosed()){
+            DBMor.writeToLog(con,test_id,test_date,test_result);}
+        else {
+            testResult = ""+ test_id+"+"+test_date+"+"+test_result+"";
+            saveResultsToFile(testResult);
+        }
+        }
+ //   }
 
 
     public static String takeScreenShot(WebDriver driver, String ImagesPath) {

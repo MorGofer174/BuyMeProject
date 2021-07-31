@@ -27,7 +27,7 @@ public class DBMor {
         con.close();
     }
 
-    public static void createTable(Connection con) throws SQLException {
+    public static void createConfigTable(Connection con) throws SQLException {
         String statementToExecute = "CREATE TABLE " + DATABASE_NAME + ".`config`(`config_id` INT NOT NULL,`config_name` VARCHAR(45) NOT NULL,`config_data` VARCHAR(45) NOT NULL, PRIMARY KEY (`config_id`));";
         con.createStatement().execute(statementToExecute);
     }
@@ -35,6 +35,26 @@ public class DBMor {
         String statementToExecute = "INSERT INTO " + DATABASE_NAME + ".config (`config_id`, `config_name`, `config_data`) VALUES ('" + config_id + "', '" + config_name + "','" + config_data + "');";
         con.createStatement().execute(statementToExecute);
     }
+    public static void createLogTable(Connection con) throws SQLException {
+        String statementToExecute = "CREATE TABLE " + DATABASE_NAME + ".`history`(`test_id` INT NOT NULL,`test_date` VARCHAR(50) NOT NULL,`test_result` VARCHAR(10) NOT NULL, PRIMARY KEY (`test_id`));";
+        con.createStatement().execute(statementToExecute);
+    }
+    public static void writeToLog (Connection con, int test_id, String test_date, String test_result) throws SQLException {
+        String statementToExecute = "INSERT INTO " + DATABASE_NAME + ".history (`test_id`, `test_date`, `test_result`) VALUES ('" + test_id + "', '" + test_date + "','" + test_result + "');";
+        con.createStatement().execute(statementToExecute);
+    }
+
+    public static void clearLog(Connection con) throws SQLException {
+        String statementToExecute = "DELETE * FROM `" + DATABASE_NAME + "`.`history`;";
+        con.createStatement().execute(statementToExecute);
+    }
+
+
+//    private static void deleteUserByName(Connection con, String name) throws SQLException {
+//        String statementToExecute = "DELETE FROM `" + DATABASE_NAME + "`.`users` WHERE `name`='"+name+"';";
+//        con.createStatement().execute(statementToExecute);
+
+
 
     public static void getTableBrowser(Connection con) throws SQLException {
         String statementToExecute = "SELECT `config_data` FROM " + DATABASE_NAME + ".config WHERE `config_id` = '2';";
