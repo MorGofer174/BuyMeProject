@@ -29,7 +29,7 @@ public class Singleton {
         }
     }
 
-    public static Connection getConnectionInstance() throws SQLException {
+    public static Connection getConnectionInstance() throws SQLException {  // setting db connection instance
         String USER_NAME = "sql6427759";
         String DATABASE_NAME = "sql6427759";
         String PASSWORD = "QHSDxAB9LF";
@@ -41,7 +41,7 @@ public class Singleton {
         return con;
     }
 
-    public static WebDriver getDriverInstance(){
+    public static WebDriver getDriverInstance(){   // setting driver instance
 
         if(driver == null){
             String browserType = null;
@@ -75,7 +75,7 @@ public class Singleton {
     }
 
 
-    public static String getURL () throws SQLException {
+    public static String getURL () throws SQLException {  // getting URL from DB , in case there is no connection - from the XML
         String urlType = null;
         if (con != null && !con.isClosed()) {
             try {
@@ -94,7 +94,7 @@ public class Singleton {
         return urlType;
     }
 
-    static String getData(String keyName) throws Exception{
+    static String getData(String keyName) throws Exception{     // extracting the URL from the XML
         ClassLoader classLoader = Singleton.class.getClassLoader();
         String xmlFilePath = String.valueOf(new File(classLoader.getResource("data.xml").getFile()));
         File fXmlFile = new File(xmlFilePath);

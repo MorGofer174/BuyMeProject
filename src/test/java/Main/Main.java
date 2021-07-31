@@ -57,7 +57,8 @@ public class Main<DB> extends Base {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter(cwd + "\\extentMor.html");
         extent.attachReporter(htmlReporter);
         test.log(Status.INFO, "before test method");
- //       DBMor.createLogTable(con);
+     //   DBMor.createLogTable(con);
+   //     DBMor.clearLog(con);
 
 
     }

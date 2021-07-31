@@ -25,7 +25,7 @@ public  class Base {
         }
     }
 
-    public static void saveResultsToFile(String testResult) { // saves the result array to file
+    public static void saveResultsToFile(String testResult) { // saves the results to txt file
         try {
             File ByuMeFile = new File("C:\\BuyMe2TestResults.txt");
             if (ByuMeFile.createNewFile()) {
@@ -70,8 +70,8 @@ public  class Base {
             Assert.assertEquals(value, text);
     }
 
-    public void writeTestResult(Connection con, int test_id, String test_date, String test_result) throws SQLException {
-        if (con == null && !con.isClosed()){
+    public void writeTestResult(Connection con, int test_id, String test_date, String test_result) throws SQLException { // saves the test results in DB table, if there is no connection - writes to txt file
+        if (con != null && !con.isClosed()){
             DBMor.writeToLog(con,test_id,test_date,test_result);}
         else {
             testResult = ""+ test_id+"+"+test_date+"+"+test_result+"";
@@ -80,7 +80,7 @@ public  class Base {
         }
  //   }
 
-
+// from last project - not used in this one
     public static String takeScreenShot(WebDriver driver, String ImagesPath) {
         TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
         File screenShotFile = takesScreenshot.getScreenshotAs(OutputType.FILE);

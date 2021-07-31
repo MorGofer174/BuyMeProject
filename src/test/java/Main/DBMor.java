@@ -3,7 +3,7 @@ package Main;
 import java.sql.*;
 
 public class DBMor {
-   // Connection con = Singleton.getConnectionInstance();
+    Connection con = Singleton.getConnectionInstance();
     private static String USER_NAME;
     private static String DATABASE_NAME = "sql6427759";
     private static String PASSWORD;
@@ -18,13 +18,6 @@ public class DBMor {
 
     public static void main(String[] args) throws SQLException {
         Connection con = DriverManager.getConnection("jdbc:mysql://" + SERVER + ":" + PORT, USER_NAME, PASSWORD);
-
-    //    createTable(con);
-   //     insertUser(con, 1, "URL","https://www.buyme.co.il");
-//        getTableBrowser(con);
-//        deleteUserByName(con, "daniel");
-//        updateUserName(con,1234, "John");
-        con.close();
     }
 
     public static void createConfigTable(Connection con) throws SQLException {
@@ -45,9 +38,10 @@ public class DBMor {
     }
 
     public static void clearLog(Connection con) throws SQLException {
-        String statementToExecute = "DELETE * FROM `" + DATABASE_NAME + "`.`history`;";
-        con.createStatement().execute(statementToExecute);
-    }
+        Statement stmt = con.createStatement();
+        String sql = "TRUNCATE my_table";
+        stmt.executeUpdate(sql);
+        }
 
 
 //    private static void deleteUserByName(Connection con, String name) throws SQLException {
@@ -62,7 +56,6 @@ public class DBMor {
         ResultSet rs = stmt.executeQuery(statementToExecute);
         while(rs.next()){
             config_Browser_data = rs.getString("config_data");
-            System.out.println(config_Browser_data);
         }
         rs.close();
     }
