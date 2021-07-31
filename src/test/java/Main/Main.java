@@ -7,7 +7,6 @@ import Pages.IntroScreen;
 import Pages.PickBusinessScreen;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.By;
@@ -48,7 +47,6 @@ public class Main<DB> extends Base {
 //        DBMor.createTable(con);
 //        DBMor.insertData(con, 1, "URL","https://www.buyme.co.il");
 //        DBMor.insertData(con, 2, "BROWSER","Chrome");
-//        DBMor.updateDB(con,2);
         DBMor.getTableURL(conInstance);
         driver = singleton.getDriverInstance();
         String URL = singleton.getURL();
@@ -73,317 +71,284 @@ public class Main<DB> extends Base {
             writeTestResult(con, 1, timeNow, "fail");
         }
     }
-// Extra Tests
 
-//    @Test (priority = 2)
-//    public void enterNoCredentials(){
-//        try {
-//            extra.pressEnterNoCredentials();
-//            test.log(Status.PASS, "executed successfully");
-//        } catch (Exception e) {
-//            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
-//        }
-//    }
-//
-//    @Test(priority = 3)
-//    public void assertErrors() {
-//        try {
-//            extra.assertsErrors();
-//            test.log(Status.PASS, "executed successfully");
-//        } catch (Exception e) {
-//            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
-//        }
-//    }
-    @Test (priority = 4)
+    @Test (priority = 2)
     public void registration () throws SQLException {
         try {
             introScreen.clickRegister();
             wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("span[data-ember-action='1405']")));
-            writeTestResult(con,2,timeNow,"pass");
+            writeTestResult(con, 2, timeNow, "pass");
         } catch (Exception e) {
             writeTestResult(con, 2, timeNow, "fail");
         }
-        }
+    }
 
-    @Test (priority = 5)
-    public void firstName(){
+    @Test (priority = 3)
+    public void firstName() throws SQLException {
         try {
             introScreen.enterFirstName();
-            test.log(Status.PASS, "executed successfully");
+            writeTestResult(con, 3, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 3, timeNow, "fail");
         }
-        }
+    }
 
-    @Test (priority = 6)
-    public void email(){
+    @Test (priority = 4)
+    public void email() throws SQLException {
         try {
             introScreen.enterEmail();
-            test.log(Status.PASS, "executed successfully");
+            writeTestResult(con, 4, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 4, timeNow, "fail");
+        }
+    }
+
+    @Test (priority = 5)
+    public void password() throws SQLException {
+        try {
+            introScreen.enterPassword();
+            writeTestResult(con, 5, timeNow, "pass");
+        } catch (Exception e) {
+            writeTestResult(con, 5, timeNow, "fail");
+        }
+    }
+
+    @Test (priority = 6)
+    public void passwordAgain() throws SQLException {
+        try {
+            introScreen.re_enterPassword();
+            writeTestResult(con, 6, timeNow, "pass");
+        } catch (Exception e) {
+            writeTestResult(con, 6, timeNow, "fail");
         }
     }
 
     @Test (priority = 7)
-    public void password(){
+    public void register() throws SQLException {
         try {
-            introScreen.enterPassword();
-            test.log(Status.PASS, "executed successfully");
+            introScreen.confirmRegistration();
+            writeTestResult(con, 7, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 7, timeNow, "fail");
         }
     }
 
     @Test (priority = 8)
-    public void passwordAgain(){
+    public void openAmount() throws SQLException {
         try {
-            introScreen.re_enterPassword();
-            test.log(Status.PASS, "executed successfully");
+            homeScreen.openAmountList();
+            writeTestResult(con, 8, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 8, timeNow, "fail");
         }
     }
 
     @Test (priority = 9)
-    public void register() {
+    public void chooseAmount() throws SQLException {
         try {
-            introScreen.confirmRegistration();
-            test.log(Status.PASS, "executed successfully");
+            homeScreen.chooseAmount();
+            writeTestResult(con, 9, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 9, timeNow, "fail");
         }
     }
 
     @Test (priority = 10)
-    public void openAmount(){
+    public void openRegion() throws SQLException {
         try {
-            homeScreen.openAmountList();
-            test.log(Status.PASS, "executed successfully");
+            homeScreen.openRegionList();
+            writeTestResult(con, 10, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 10, timeNow, "fail");
         }
     }
 
     @Test (priority = 11)
-    public void chooseAmount(){
+    public void chooseRegion() throws SQLException {
         try {
-            homeScreen.chooseAmount();
-            test.log(Status.PASS, "executed successfully");
+            homeScreen.chooseRegion();
+            writeTestResult(con, 11, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 11, timeNow, "fail");
         }
     }
 
     @Test (priority = 12)
-    public void openRegion(){
+    public void openCategory() throws SQLException {
         try {
-            homeScreen.openRegionList();
-            test.log(Status.PASS, "executed successfully");
+            homeScreen.openCategoryList();
+            writeTestResult(con, 12, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 12, timeNow, "fail");
         }
     }
 
     @Test (priority = 13)
-    public void chooseRegion(){
+    public void chooseCategory() throws SQLException {
         try {
-            homeScreen.chooseRegion();
-            test.log(Status.PASS, "executed successfully");
+            homeScreen.chooseCategory();
+            writeTestResult(con, 13, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 13, timeNow, "fail");
         }
     }
 
     @Test (priority = 14)
-    public void openCategory(){
+    public void findGift() throws SQLException {
         try {
-            homeScreen.openCategoryList();
-            test.log(Status.PASS, "executed successfully");
+            homeScreen.pressFindGift();
+            writeTestResult(con, 14, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 14, timeNow, "fail");
         }
-
     }
 
     @Test (priority = 15)
-    public void chooseCategory(){
+    public void assertsPickBusinessURL() throws SQLException {
         try {
-            homeScreen.chooseCategory();
-            test.log(Status.PASS, "executed successfully");
+            pickBusiness.assertURL();
+            writeTestResult(con, 15, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 15, timeNow, "fail");
         }
     }
 
     @Test (priority = 16)
-    public void findGift(){
+    public void picksBusiness() throws SQLException {
         try {
-            homeScreen.pressFindGift();
-            test.log(Status.PASS, "executed successfully");
+            pickBusiness.pickABusiness();
+            writeTestResult(con, 16, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 16, timeNow, "fail");
         }
     }
 
     @Test (priority = 17)
-    public void assertsPickBusinessURL(){
+    public void picksAmount() throws SQLException {
         try {
-            pickBusiness.assertURL();
-            test.log(Status.PASS, "executed successfully");
+            pickBusiness.pickAmount();
+            writeTestResult(con, 17, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 17, timeNow, "fail");
         }
     }
 
     @Test (priority = 18)
-    public void picksBusiness(){
+    public void sendReceiverName() throws SQLException {
         try {
-            pickBusiness.pickABusiness();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.enterReceiverName();
+            writeTestResult(con, 18, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 18, timeNow, "fail");
         }
     }
 
     @Test (priority = 19)
-    public void picksAmount(){
+    public void openEvents() throws SQLException {
         try {
-            pickBusiness.pickAmount();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.openForWhatEvent();
+            writeTestResult(con, 19, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 19, timeNow, "fail");
         }
     }
 
     @Test (priority = 20)
-    public void sendReceiverName(){
+    public void pickEvent() throws SQLException {
         try {
-            informationScreen.enterReceiverName();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.pickEvent();
+            writeTestResult(con, 20, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 20, timeNow, "fail");
         }
     }
 
     @Test (priority = 21)
-    public void openEvents(){
+    public void clearsGreetings() throws SQLException {
         try {
-            informationScreen.openForWhatEvent();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.clearBlessingText();
+            writeTestResult(con, 21, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 21, timeNow, "fail");
         }
     }
 
     @Test (priority = 22)
-    public void pickEvent(){
+    public void writGreetings() throws SQLException {
         try {
-            informationScreen.pickEvent();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.sendBlessingText();
+            writeTestResult(con, 22, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 22, timeNow, "fail");
         }
     }
 
     @Test (priority = 23)
-    public void clearsGreetings(){
+    public void uploadsPic() throws SQLException {
         try {
-            informationScreen.clearBlessingText();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.uploadPic();
+            writeTestResult(con, 23, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 23, timeNow, "fail");
         }
     }
 
     @Test (priority = 24)
-    public void writGreetings(){
+    public void pressContinue() throws SQLException {
         try {
-            informationScreen.sendBlessingText();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.pressContinueButton();
+            writeTestResult(con, 24, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 24, timeNow, "fail");
         }
     }
 
     @Test (priority = 25)
-    public void uploadsPic(){
+    public void choosePhone() throws SQLException {
         try {
-            informationScreen.uploadPic();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.pressPhone();
+            writeTestResult(con, 25, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 25, timeNow, "fail");
         }
     }
 
     @Test (priority = 26)
-    public void pressContinue(){
+    public void writePhone () throws SQLException {
         try {
-            informationScreen.pressContinueButton();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.enterPhone();
+            writeTestResult(con, 26, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 26, timeNow, "fail");
         }
     }
 
     @Test (priority = 27)
-    public void choosePhone(){
+    public void assertSendersName () throws SQLException {
         try {
-            informationScreen.pressPhone();
-            test.log(Status.PASS, "executed successfully");
+            informationScreen.assertSenderName();
+            writeTestResult(con, 27, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 27, timeNow, "fail");
         }
     }
 
     @Test (priority = 28)
-    public void writePhone (){
-        try {
-            informationScreen.enterPhone();
-            test.log(Status.PASS, "executed successfully");
-        } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
-        }
-    }
-
-    @Test (priority = 29)
-    public void assertSendersName (){
-        try {
-            informationScreen.assertSenderName();
-            test.log(Status.PASS, "executed successfully");
-        } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
-        }
-    }
-
-    @Test (priority = 30)
-    public void senderPhone(){
+    public void senderPhone() throws SQLException {
         try {
             informationScreen.enterSenderPhone();
-            test.log(Status.PASS, "executed successfully");
+            writeTestResult(con, 28, timeNow, "pass");
         } catch (Exception e) {
-            test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
+            writeTestResult(con, 28, timeNow, "fail");
         }
     }
 
 
-     @AfterClass //  flushes the report and closes the browser
-     public void close() {
-        test.log(Status.INFO, "finished");
-        extent.flush();
+     @AfterClass // closes the browser and the DB connection
+     public void close() throws SQLException {
+        con.close();
         driver.quit();
     }
     }
 
-//    private static String takeScreenShot(WebDriver driver, String ImagesPath) {
-//        TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
-//        File screenShotFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
-//        File destinationFile = new File(ImagesPath + ".png");
-//        try {
-//            FileUtils.copyFile(screenShotFile, destinationFile);
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//        return ImagesPath + ".png";
 
