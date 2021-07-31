@@ -49,9 +49,8 @@ public class Main<DB> {
         conInstance = singleton.getConnectionInstance();
 //        DBMor.createTable(con);
 //        DBMor.insertData(con, 1, "URL","https://www.buyme.co.il");
-//        DBMor.insertData(con, 2, "BROWSER","chrome");
+//        DBMor.insertData(con, 2, "BROWSER","Chrome");
 //        DBMor.updateDB(con,2);
-        DBMor.getTableBrowser(conInstance);
         DBMor.getTableURL(conInstance);
         driver = singleton.getDriverInstance();
         String URL = singleton.getURL();
@@ -65,15 +64,6 @@ public class Main<DB> {
 
 
     }
-//    @Test
-//    public void createDBTable() throws SQLException {
-//        DBMor.createTable(con);
-//    }
-//    @Test
-//    public void insertTableData() throws SQLException {
-//        DBMor.insertData(con, 1, "URL","https://www.buyme.co.il");
-//        DBMor.insertData(con, 2, "BROWSER","chrome");
-//    }
 
     @Test (priority = 1)
     public void enter (){
@@ -84,6 +74,7 @@ public class Main<DB> {
             test.fail("execution failed", MediaEntityBuilder.createScreenCaptureFromPath(takeScreenShot(driver, timeNow)).build());
         }
     }
+// Extra Tests
 
 //    @Test (priority = 2)
 //    public void enterNoCredentials(){

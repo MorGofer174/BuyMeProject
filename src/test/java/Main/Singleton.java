@@ -49,6 +49,7 @@ public class Singleton {
                 if (con != null) {
                     if (!con.isClosed())
                     try{
+                        DBMor.getTableBrowser(con);
                     browserType = dbMor.config_Browser_data;
                 } catch (Exception e) {
                 e.printStackTrace();
